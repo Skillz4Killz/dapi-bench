@@ -54,3 +54,5 @@ university
       );
     }, 60000);
   });
+
+university.connect();
