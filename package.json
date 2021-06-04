@@ -5,11 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "discordeno": "deno run -A --no-check memory/discordeno.ts",
-    "harmony": "deno run -A --no-check memory/harmony.ts",
+    "detritus": "npm i && node memory/detritus.js",
     "discordjs": "npm i && node memory/discord.js",
+    "discordeno": "deno run -A --no-check memory/discordeno.ts",
     "eris": "npm i && node memory/eris.js",
-    "detritus": "npm i && node memory/detritus.js"
+    "harmony": "deno run -A --no-check memory/harmony.ts",
+    "jscord": "npm i && node memory/js-cord.js",
+    "university": "deno run -A --no-check memory/university.ts"
   },
   "repository": {
     "type": "git",
