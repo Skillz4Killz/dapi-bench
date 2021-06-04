@@ -4,7 +4,7 @@ const { READY, SHARD_READY, logMemory } = require("../utils/events-node");
 
 const djsStarted = Date.now();
 let djsTime = Date.now();
-let djsCounter = 1;
+let djsCounter = 0;
 
 const client = new Client({
   token: TOKEN,

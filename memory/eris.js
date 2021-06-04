@@ -1,9 +1,10 @@
 const Eris = require("eris");
 const { TOKEN, OWNER_ID } = require("../configs-node");
-const { READY, SHARD_READY } = require("../utils/events-node");
+const { READY, SHARD_READY, logMemory } = require("../utils/events-node");
 
 const erisStarted = Date.now();
 let erisTime = Date.now();
+let erisCounter = 0;
 
 const bot = new Eris.Client(TOKEN, {
   maxShards: "auto",
@@ -37,22 +38,26 @@ bot.on("message", (message) => {
   if (message.author.id !== OWNER_ID || message.content !== "!starttests")
     return;
 
-  logMemory();
-  setInterval(logMemory, 60000);
-});
-
-let counter = 1;
-function logMemory() {
-  const usage = process.memoryUsage();
-  const bytes = 1000000;
-  console.log(
-    `[${counter} eris] Memory Usage RSS: ${usage.rss / bytes}MB Heap Used: ${
-      usage.heapUsed / bytes
-    }MB Heap Total: ${usage.heapTotal / bytes}MB | Members ${
-      bot.users.size
-    } Guilds: ${bot.guilds.size}`
+  logMemory(
+    process.memoryUsage(),
+    erisCounter,
+    "eris",
+    bot.guilds.size,
+    bot.users.size,
+    0,
+    0
   );
-  counter++;
-}
+  setInterval(() => {
+    logMemory(
+      process.memoryUsage(),
+      erisCounter,
+      "eris",
+      bot.guilds.size,
+      bot.users.size,
+      0,
+      0
+    );
+  }, 60000);
+});
 
 bot.connect();

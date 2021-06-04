@@ -5,6 +5,7 @@ const { READY, SHARD_READY, logMemory } = require("../utils/events-node");
 
 const detritusStarted = Date.now();
 let detritusTime = Date.now();
+let detritusCounter = 0;
 
 const commandClient = new CommandClient(TOKEN, {
   prefix: "asdgwq43ewfae3fwawev",
@@ -28,7 +29,6 @@ commandClient.on("ready", () => {
   READY(detritusStarted);
 });
 
-let detritusCounter = 1;
 
 (async () => {
   const client = await commandClient.run();
