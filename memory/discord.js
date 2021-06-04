@@ -42,7 +42,7 @@ djs
       "discord.js",
       djs.guilds.cache.size,
       djs.users.cache.size,
-      0,
+      djs.channels.cache.reduce((a, b) => a + (b.messages?.cache.size || 0), 0),
       djs.channels.cache.size
     );
     setInterval(() => {
@@ -52,7 +52,10 @@ djs
         "discord.js",
         djs.guilds.cache.size,
         djs.users.cache.size,
-        0,
+        djs.channels.cache.reduce(
+          (a, b) => a + (b.messages?.cache.size || 0),
+          0
+        ),
         djs.channels.cache.size
       );
     }, 60000);
