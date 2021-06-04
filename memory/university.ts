@@ -1,4 +1,4 @@
-import { Client } from "https://raw.githubusercontent.com/discordeno/university/main/mod.ts";
+import { Client, snowflakeToBigint } from "https://raw.githubusercontent.com/discordeno/university/main/mod.ts";
 import { TOKEN, OWNER_ID } from "../configs-deno.ts";
 import { READY, SHARD_READY, logMemory } from "../utils/events-deno.ts";
 
@@ -30,7 +30,7 @@ university
     universityTime = SHARD_READY(id, universityTime);
   })
   .on("message", (message) => {
-    if (message.author.id !== OWNER_ID || message.content !== "!starttests")
+    if (message.author.id !== snowflakeToBigint(OWNER_ID) || message.content !== "!starttests")
       return;
 
     universitycounter = logMemory(

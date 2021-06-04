@@ -29,7 +29,6 @@ commandClient.on("ready", () => {
   READY(detritusStarted);
 });
 
-
 (async () => {
   const detritus = await commandClient.run();
   detritus.on("ready", () => {
@@ -38,9 +37,9 @@ commandClient.on("ready", () => {
 
   let shardsLoaded = 0;
 
-  detritus.on("message", (message) => {
+  detritus.on("messageCreate", (message) => {
     if (
-      message.authorId === snowflakeToBigint(OWNER_ID) ||
+      message.authorId === OWNER_ID ||
       message.content !== "!starttests"
     )
       return;

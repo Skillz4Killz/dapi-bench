@@ -15,9 +15,9 @@ harmony
   .on("shardReady", (id) => {
     harmonyTime = SHARD_READY(id, harmonyTime);
   })
-  .on("message", (message) => {
-    if (message.author.id !== OWNER_ID || message.content !== "!starttests")
-      return;
+  .on("messageCreate", (message) => {
+    if (message.author.id !== OWNER_ID) return;
+    if (message.content !== "!starttests") return;
 
     harmonyCounter = logMemory(
       Deno.memoryUsage(),
