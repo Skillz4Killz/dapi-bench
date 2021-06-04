@@ -6,7 +6,7 @@ const djsStarted = Date.now();
 let djsTime = Date.now();
 let djsCounter = 0;
 
-const client = new Client({
+const djs = new Client({
   token: TOKEN,
   shards: "auto",
   ws: {
@@ -25,7 +25,7 @@ const client = new Client({
   },
 });
 
-client
+djs
   .on("ready", () => {
     READY(djsStarted);
   })
@@ -40,22 +40,22 @@ client
       process.memoryUsage(),
       djsCounter,
       "discord.js",
-      client.guilds.cache.size,
-      client.users.cache.size,
+      djs.guilds.cache.size,
+      djs.users.cache.size,
       0,
-      client.channels.cache.size
+      djs.channels.cache.size
     );
     setInterval(() => {
       djsCounter = logMemory(
         process.memoryUsage(),
         djsCounter,
         "discord.js",
-        client.guilds.cache.size,
-        client.users.cache.size,
+        djs.guilds.cache.size,
+        djs.users.cache.size,
         0,
-        client.channels.cache.size
+        djs.channels.cache.size
       );
     }, 60000);
   });
 
-client.login(TOKEN);
+djs.login(TOKEN);

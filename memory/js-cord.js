@@ -5,17 +5,17 @@ const { READY } = require("../utils/events-node");
 const started = Date.now();
 let time = Date.now();
 
-const client = new discord.Client();
+const jscord = new discord.Client();
 
-client.on("ready", () => {
+jscord.on("ready", () => {
   READY(started);
 });
 
-client.on("shardReady", (id) => {
+jscord.on("shardReady", (id) => {
   time = SHARD_READY(id, time);
 });
 
-client.on("message", async (msg) => {
+jscord.on("message", async (msg) => {
   if (message.author.id !== OWNER_ID || message.content !== "!starttests")
     return;
 
@@ -23,7 +23,7 @@ client.on("message", async (msg) => {
   setInterval(logMemory, 60000);
 });
 
-client.login(TOKEN);
+jscord.login(TOKEN);
 
 let counter = 1;
 function logMemory() {
@@ -36,10 +36,10 @@ function logMemory() {
     heapUsed: usage.heapUsed / bytes,
     heapTotal: usage.heapTotal / bytes,
     lib: "discordeno",
-    guilds: client.guilds.length,
-    members: client.users.length,
-    messages: client.messages.length,
-    channels: client.channels.length,
+    guilds: jscord.guilds.length,
+    members: jscord.users.length,
+    messages: jscord.messages.length,
+    channels: jscord.channels.length,
   });
   counter++;
 }

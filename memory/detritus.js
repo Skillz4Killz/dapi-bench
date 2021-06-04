@@ -31,14 +31,14 @@ commandClient.on("ready", () => {
 
 
 (async () => {
-  const client = await commandClient.run();
-  client.on("ready", () => {
+  const detritus = await commandClient.run();
+  detritus.on("ready", () => {
     READY(detritusStarted);
   });
 
   let shardsLoaded = 0;
 
-  client.on("message", (message) => {
+  detritus.on("message", (message) => {
     if (
       message.authorId === snowflakeToBigint(OWNER_ID) ||
       message.content !== "!starttests"
@@ -67,7 +67,7 @@ commandClient.on("ready", () => {
     }, 60000);
   });
 
-  client.on("gatewayReady", (id) => {
+  detritus.on("gatewayReady", (id) => {
     shardsLoaded++;
     detritusTime = SHARD_READY(id.raw.shard, detritusTime);
 
@@ -76,6 +76,6 @@ commandClient.on("ready", () => {
     }
   });
 
-  // client has received the READY payload, do stuff now
-  console.log(`Client has loaded with a shard count of ${client.shardCount}`);
+  // detritus has received the READY payload, do stuff now
+  console.log(`Client has loaded with a shard count of ${detritus.shardCount}`);
 })();

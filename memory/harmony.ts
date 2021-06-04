@@ -2,13 +2,13 @@ import { Client, GatewayIntents } from "https://deno.land/x/harmony/mod.ts";
 import { TOKEN, OWNER_ID } from "../configs-deno.ts";
 import { READY, SHARD_READY, logMemory } from "../utils/events-deno.ts";
 
-const client = new Client({ token: TOKEN });
+const harmony = new Client({ token: TOKEN });
 
 const harmonyStarted = Date.now();
 let harmonyTime = Date.now();
 let harmonyCounter = 1;
 
-client
+harmony
   .on("ready", () => {
     READY(harmonyStarted);
   })
@@ -41,7 +41,7 @@ client
     }, 60000);
   });
 
-client.connect(TOKEN, [
+harmony.connect(TOKEN, [
   GatewayIntents.DIRECT_MESSAGE_REACTIONS,
   GatewayIntents.GUILD_BANS,
   GatewayIntents.GUILD_EMOJIS,
