@@ -38,10 +38,7 @@ commandClient.on("ready", () => {
   let shardsLoaded = 0;
 
   detritus.on("messageCreate", (message) => {
-    if (
-      message.authorId === OWNER_ID ||
-      message.content !== "!starttests"
-    )
+    if (message.author.id !== OWNER_ID || message.content !== "!starttests")
       return;
 
     detritusCounter = logMemory(

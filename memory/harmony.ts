@@ -1,4 +1,7 @@
-import { Client, GatewayIntents } from "https://deno.land/x/harmony@v2.0.0-rc2/mod.ts";
+import {
+  Client,
+  GatewayIntents,
+} from "https://deno.land/x/harmony@v2.0.0-rc2/mod.ts";
 import { TOKEN, OWNER_ID } from "../configs-deno.ts";
 import { READY, SHARD_READY, logMemory } from "../utils/events-deno.ts";
 
@@ -15,7 +18,7 @@ harmony
   .on("shardReady", (id) => {
     harmonyTime = SHARD_READY(id, harmonyTime);
   })
-  .on("messageCreate", (message) => {
+  .on("messageCreate", async (message) => {
     if (message.author.id !== OWNER_ID) return;
     if (message.content !== "!starttests") return;
 
@@ -23,20 +26,20 @@ harmony
       Deno.memoryUsage(),
       harmonyCounter,
       "harmony",
+      (await harmony.guilds.array()).length,
+      (await harmony.users.array()).length,
       0,
-      0,
-      0,
-      0
+      (await harmony.channels.array()).length
     );
-    setInterval(() => {
+    setInterval(async () => {
       harmonyCounter = logMemory(
         Deno.memoryUsage(),
         harmonyCounter,
         "harmony",
+        (await harmony.guilds.array()).length,
+        (await harmony.users.array()).length,
         0,
-        0,
-        0,
-        0
+        (await harmony.channels.array()).length
       );
     }, 60000);
   });

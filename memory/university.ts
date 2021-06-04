@@ -1,4 +1,7 @@
-import { Client, snowflakeToBigint } from "https://raw.githubusercontent.com/discordeno/university/main/mod.ts";
+import {
+  Client,
+  snowflakeToBigint,
+} from "https://raw.githubusercontent.com/discordeno/university/main/mod.ts";
 import { TOKEN, OWNER_ID } from "../configs-deno.ts";
 import { READY, SHARD_READY, logMemory } from "../utils/events-deno.ts";
 
@@ -22,6 +25,8 @@ const university = new Client({
   ],
 });
 
+university.gateway.spawnShardDelay = 2800;
+
 university
   .on("ready", () => {
     READY(universityStarted);
@@ -29,8 +34,11 @@ university
   .on("shardReady", (id) => {
     universityTime = SHARD_READY(id, universityTime);
   })
-  .on("message", (message) => {
-    if (message.author.id !== snowflakeToBigint(OWNER_ID) || message.content !== "!starttests")
+  .on("messageCreate", (message) => {
+    if (
+      message.authorId !== snowflakeToBigint(OWNER_ID) ||
+      message.content !== "!starttests"
+    )
       return;
 
     universitycounter = logMemory(
