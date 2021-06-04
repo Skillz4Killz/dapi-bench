@@ -1,5 +1,5 @@
 const Eris = require("eris");
-const { TOKEN, OWNER_ID } = require("../configs");
+const { TOKEN, OWNER_ID } = require("../configs-node");
 
 const started = Date.now();
 let time = Date.now();
