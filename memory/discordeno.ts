@@ -1,4 +1,7 @@
-import { startBot, cache } from "https://deno.land/x/discordeno@11.0.0-rc.5/mod.ts";
+import {
+  startBot,
+  cache,
+} from "https://deno.land/x/discordeno@11.0.0-rc.5/mod.ts";
 import { TOKEN } from "../configs.ts";
 
 const started = Date.now();
@@ -41,13 +44,13 @@ function logMemory() {
   const usage = Deno.memoryUsage();
   const bytes = 1000000;
   console.log(
-    `[${counter} v11] Memory Usage RSS: ${usage.rss / bytes}MB Heap Used: ${
-      usage.heapUsed / bytes
-    }MB Heap Total: ${usage.heapTotal / bytes}MB | Guilds: ${
-      cache.guilds.size
-    } | Members: ${cache.members.size} | Messages: ${
-      cache.messages.size
-    } | Channels: ${cache.channels.size}`
+    `[${counter} discordeno] Memory Usage RSS: ${
+      usage.rss / bytes
+    }MB Heap Used: ${usage.heapUsed / bytes}MB Heap Total: ${
+      usage.heapTotal / bytes
+    }MB | Guilds: ${cache.guilds.size} | Members: ${
+      cache.members.size
+    } | Messages: ${cache.messages.size} | Channels: ${cache.channels.size}`
   );
   counter++;
 }
