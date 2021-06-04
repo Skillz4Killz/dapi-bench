@@ -2,7 +2,7 @@
 
 This is a simple benchmark comparing the current officially vetted libraries for JavaScript & TypeScript languages. Before, beginning setup you may need to install [**node**](https://nodejs.org/en/) or [**deno**](https://deno.land/#installation) or both.
 
-It is impossible to have everyone test on the same system because each computer can be different. I recommend testing this in an environment that can be shared amongst anyone. The benchmarks below were conducted through Github Codespaces:
+It is impossible to have everyone test on the same system because each computer can be different. I recommend testing this in an environment that can be shared and used by anyone. The benchmarks below were conducted through [Github Codespaces](https://github.com/features/codespaces):
 
 ## Results
 
