@@ -1,2 +1,3 @@
-configs.js
+configs-node.js
+configs-deno.ts
 node_modules/
