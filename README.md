@@ -42,7 +42,11 @@ npm run eris
 npm run detritus
 ```
 
-5. Wait and watch the logs
+5. Wait and watch the logs to track startup times.
+
+6. Once all libraries are fully ready, go into a channel and type `!starttests` to begin logging memory.
+
+> Note: Do NOT start up every library at once, wait for each library one at a time to start all your shards. Remember your bot has a identify rate limit which needs to be respected. Due to this delay, you may have a slightly higher memory count on libraries that are started earlier as they will have received more events coming in while waiting for other libraries to fully start.
 
 ## Contribute
 

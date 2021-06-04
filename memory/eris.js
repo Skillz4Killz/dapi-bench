@@ -1,8 +1,9 @@
 const Eris = require("eris");
 const { TOKEN, OWNER_ID } = require("../configs-node");
+const { READY, SHARD_READY } = require("../utils/events-node");
 
-const started = Date.now();
-let time = Date.now();
+const erisStarted = Date.now();
+let erisTime = Date.now();
 
 const bot = new Eris.Client(TOKEN, {
   maxShards: "auto",
@@ -21,17 +22,11 @@ const bot = new Eris.Client(TOKEN, {
 });
 
 bot.on("ready", () => {
-  console.log(
-    "Successfully connected to gateway",
-    (Date.now() - started) / 1000,
-    "seconds to start."
-  );
+  READY(erisStarted);
 });
 
 bot.on("shardReady", (id) => {
-  const here = Date.now();
-  console.log(`SHARD READY`, id, (here - time) / 1000, "seconds to start.");
-  time = here;
+  erisTime = SHARD_READY(id, erisTime);
 });
 
 bot.on("error", (err) => {
