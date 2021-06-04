@@ -1,38 +1,29 @@
 import { Client, GatewayIntents } from "https://deno.land/x/harmony/mod.ts";
 import { TOKEN, OWNER_ID } from "../configs-deno.ts";
-import { READY, SHARD_READY } from "../utils/events-deno.ts";
+import { READY, SHARD_READY, logMemory } from "../utils/events-deno.ts";
 
 const client = new Client({ token: TOKEN });
 
-const started = Date.now();
-let time = Date.now();
+const harmonyStarted = Date.now();
+let harmonyTime = Date.now();
+let harmonyCounter = 1;
 
 client
   .on("ready", () => {
-    READY(started);
+    READY(harmonyStarted);
   })
   .on("shardReady", (id) => {
-    time = SHARD_READY(id, time);
+    harmonyTime = SHARD_READY(id, harmonyTime);
   })
   .on("message", (message) => {
     if (message.author.id !== OWNER_ID || message.content !== "!starttests")
       return;
 
-    logMemory();
-    setInterval(logMemory, 60000);
+    logMemory(Deno.memoryUsage(), harmonyCounter, "harmony", 0, 0, 0, 0);
+    setInterval(() => {
+      logMemory(Deno.memoryUsage(), harmonyCounter, "harmony", 0, 0, 0, 0);
+    }, 60000);
   });
-
-let counter = 1;
-function logMemory() {
-  const usage = Deno.memoryUsage();
-  const bytes = 1000000;
-  console.log(
-    `[${counter} harmony] Memory Usage RSS: ${usage.rss / bytes}MB Heap Used: ${
-      usage.heapUsed / bytes
-    }MB Heap Total: ${usage.heapTotal / bytes}MB`
-  );
-  counter++;
-}
 
 client.connect(TOKEN, [
   GatewayIntents.DIRECT_MESSAGE_REACTIONS,
