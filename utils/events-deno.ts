@@ -12,7 +12,7 @@ export function SHARD_READY(id: number, time: number) {
   return here;
 }
 
-const bytes = 1000000;
+const denobytes = 1000000;
 
 export function logMemory(
   usage: any,
@@ -25,9 +25,9 @@ export function logMemory(
 ) {
   console.log({
     minutes: counter,
-    rss: usage.rss / bytes,
-    heapUsed: usage.heapUsed / bytes,
-    heapTotal: usage.heapTotal / bytes,
+    rss: usage.rss / denobytes,
+    heapUsed: usage.heapUsed / denobytes,
+    heapTotal: usage.heapTotal / denobytes,
     lib,
     guilds,
     members,

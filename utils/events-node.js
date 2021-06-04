@@ -9,8 +9,10 @@ exports.READY = function (started) {
 exports.SHARD_READY = function (id, time) {
   const here = Date.now();
   console.log(`SHARD READY`, id, (here - time) / 1000, "seconds to start.");
-  return time;
+  return here;
 };
+
+const nodebytes = 1000000;
 
 exports.logMemory = function (
   usage,
@@ -23,9 +25,9 @@ exports.logMemory = function (
 ) {
   console.log({
     minutes: counter,
-    rss: usage.rss / bytes,
-    heapUsed: usage.heapUsed / bytes,
-    heapTotal: usage.heapTotal / bytes,
+    rss: usage.rss / nodebytes,
+    heapUsed: usage.heapUsed / nodebytes,
+    heapTotal: usage.heapTotal / nodebytes,
     lib,
     guilds,
     members,

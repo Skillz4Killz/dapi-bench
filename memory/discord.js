@@ -33,8 +33,11 @@ djs
     djsTime = SHARD_READY(id, djsTime);
   })
   .on("message", (message) => {
+    console.log("message came", 1);
     if (message.author.id !== OWNER_ID || message.content !== "!starttests")
       return;
+
+    console.log("message came", 2);
 
     djsCounter = logMemory(
       process.memoryUsage(),

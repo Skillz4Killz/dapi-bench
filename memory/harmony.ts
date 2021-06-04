@@ -1,4 +1,4 @@
-import { Client, GatewayIntents } from "https://deno.land/x/harmony/mod.ts";
+import { Client, GatewayIntents } from "https://deno.land/x/harmony@v2.0.0-rc2/mod.ts";
 import { TOKEN, OWNER_ID } from "../configs-deno.ts";
 import { READY, SHARD_READY, logMemory } from "../utils/events-deno.ts";
 

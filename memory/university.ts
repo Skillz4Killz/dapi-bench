@@ -1,4 +1,4 @@
-import { Client } from "https://github.com/discordeno/university/blob/main/mod.ts";
+import { Client } from "https://raw.githubusercontent.com/discordeno/university/main/mod.ts";
 import { TOKEN, OWNER_ID } from "../configs-deno.ts";
 import { READY, SHARD_READY, logMemory } from "../utils/events-deno.ts";
 
