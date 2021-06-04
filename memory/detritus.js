@@ -68,7 +68,7 @@ commandClient.on("ready", () => {
 
   detritus.on("gatewayReady", (id) => {
     shardsLoaded++;
-    detritusTime = SHARD_READY(id.raw.shard, detritusTime);
+    detritusTime = SHARD_READY(id.raw.shard[0], detritusTime);
 
     if (shardsLoaded === 10) {
       READY(detritusStarted);
