@@ -1,9 +1,10 @@
 const { CommandClient } = require("detritus-client");
 const { GatewayIntents } = require("detritus-client-socket/lib/constants");
 const { TOKEN, OWNER_ID } = require("../configs-node");
+const { READY, SHARD_READY, logMemory } = require("../utils/events-node");
 
-const started = Date.now();
-let time = Date.now();
+const detritusStarted = Date.now();
+let detritusTime = Date.now();
 
 const commandClient = new CommandClient(TOKEN, {
   prefix: "asdgwq43ewfae3fwawev",
@@ -24,38 +25,15 @@ const commandClient = new CommandClient(TOKEN, {
 });
 
 commandClient.on("ready", () => {
-  console.log(
-    "Successfully connected to gateway",
-    (Date.now() - started) / 1000,
-    "seconds to start."
-  );
+  READY(detritusStarted);
 });
 
-let counter = 1;
-function logMemory() {
-  const usage = process.memoryUsage();
-  const bytes = 1000000;
-  console.log(
-    `[${counter} detritus] Memory Usage RSS: ${
-      usage.rss / bytes
-    }MB Heap Used: ${usage.heapUsed / bytes}MB Heap Total: ${
-      usage.heapTotal / bytes
-    }MB`
-  );
-  counter++;
-}
+let detritusCounter = 1;
 
 (async () => {
   const client = await commandClient.run();
   client.on("ready", () => {
-    console.log(
-      "Successfully connected to gateway",
-      (Date.now() - started) / 1000,
-      "seconds to start."
-    );
-
-    logMemory();
-    setInterval(logMemory, 60000);
+    READY(detritusStarted);
   });
 
   let shardsLoaded = 0;
@@ -67,30 +45,34 @@ function logMemory() {
     )
       return;
 
-    logMemory();
-    setInterval(logMemory, 60000);
+    detritusCounter = logMemory(
+      process.memoryUsage(),
+      detritusCounter,
+      "detritus",
+      0,
+      0,
+      0,
+      0
+    );
+    setInterval(() => {
+      detritusCounter = logMemory(
+        process.memoryUsage(),
+        detritusCounter,
+        "detritus",
+        0,
+        0,
+        0,
+        0
+      );
+    }, 60000);
   });
 
   client.on("gatewayReady", (id) => {
     shardsLoaded++;
-    const here = Date.now();
-    console.log(
-      `SHARD READY`,
-      id.raw.shard,
-      (here - time) / 1000,
-      "seconds to start."
-    );
-    time = here;
+    detritusTime = SHARD_READY(id.raw.shard, detritusTime);
 
     if (shardsLoaded === 10) {
-      console.log(
-        "Successfully connected to gateway",
-        (Date.now() - started) / 1000,
-        "seconds to start."
-      );
-
-      logMemory();
-      setInterval(logMemory, 60000);
+      READY(detritusStarted);
     }
   });
 

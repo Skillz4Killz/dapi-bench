@@ -1,8 +1,10 @@
 const { Client } = require("discord.js");
 const { TOKEN, OWNER_ID } = require("../configs-node");
+const { READY, SHARD_READY, logMemory } = require("../utils/events-node");
 
-const started = Date.now();
-let time = Date.now();
+const djsStarted = Date.now();
+let djsTime = Date.now();
+let djsCounter = 1;
 
 const client = new Client({
   token: TOKEN,
@@ -25,37 +27,25 @@ const client = new Client({
 
 client
   .on("ready", () => {
-    console.log(
-      "Successfully connected to gateway",
-      (Date.now() - started) / 1000,
-      "seconds to start."
-    );
+    READY(djsStarted);
   })
   .on("shardReady", (id) => {
-    const here = Date.now();
-    console.log(`SHARD READY`, id, (here - time) / 1000, "seconds to start.");
-    time = here;
+    djsTime = SHARD_READY(id, djsTime);
   })
   .on("message", (message) => {
     if (message.author.id !== OWNER_ID || message.content !== "!starttests")
       return;
 
-    logMemory();
+    logMemory(
+      process.memoryUsage(),
+      djsCounter,
+      "discord.js",
+      client.guilds.cache.size,
+      client.users.cache.size,
+      0,
+      client.channels.cache.size
+    );
     setInterval(logMemory, 60000);
   });
 
 client.login(TOKEN);
-
-let counter = 1;
-function logMemory() {
-  const usage = process.memoryUsage();
-  const bytes = 1000000;
-  console.log(
-    `[${counter} djs] Memory Usage RSS: ${usage.rss / bytes}MB Heap Used: ${
-      usage.heapUsed / bytes
-    }MB Heap Total: ${usage.heapTotal / bytes}MB | Members ${
-      client.users.cache.size
-    } Guilds: ${client.guilds.cache.size}`
-  );
-  counter++;
-}

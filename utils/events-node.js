@@ -11,3 +11,26 @@ exports.SHARD_READY = function (id, time) {
   console.log(`SHARD READY`, id, (here - time) / 1000, "seconds to start.");
   return time;
 };
+
+exports.logMemory = function (
+  usage,
+  counter,
+  lib,
+  guilds,
+  members,
+  messages,
+  channels
+) {
+  console.log({
+    minutes: counter,
+    rss: usage.rss / bytes,
+    heapUsed: usage.heapUsed / bytes,
+    heapTotal: usage.heapTotal / bytes,
+    lib,
+    guilds,
+    members,
+    messages,
+    channels,
+  });
+  return counter++;
+};
