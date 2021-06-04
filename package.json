@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "discordeno": "deno run -A --no-check memory/discordeno.js",
-    "harmony": "deno run -A --no-check memory/harmony.js",
+    "discordeno": "deno run -A --no-check memory/discordeno.ts",
+    "harmony": "deno run -A --no-check memory/harmony.ts",
     "discordjs": "npm i && node memory/discord.js",
     "eris": "npm i && node memory/eris.js",
     "detritus": "npm i && node memory/detritus.js"
