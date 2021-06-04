@@ -1,8 +1,10 @@
 import {
   startBot,
   cache,
-} from "https://deno.land/x/discordeno@11.0.0-rc.5/mod.ts";
-import { TOKEN } from "../configs.ts";
+  snowflakeToBigint,
+} from "https://deno.land/x/discordeno/mod.ts";
+import { TOKEN, OWNER_ID } from "../configs-deno.ts";
+import { READY, SHARD_READY } from "../utils/events-deno.ts";
 
 const started = Date.now();
 let time = Date.now();
@@ -23,34 +25,50 @@ startBot({
   ],
   eventHandlers: {
     ready() {
-      console.log(
-        "Successfully connected to gateway",
-        (Date.now() - started) / 1000,
-        "seconds to start."
-      );
-      logMemory();
-      setInterval(logMemory, 60000);
+      READY(started);
     },
     shardReady(id) {
-      const here = Date.now();
-      console.log(`SHARD READY`, id, (here - time) / 1000, "seconds to start.");
-      time = here;
+      time = SHARD_READY(id, time);
+      // const here = Date.now();
+      // console.log(`SHARD READY`, id, (here - time) / 1000, "seconds to start.");
+      // time = here;
+    },
+    messageCreate(message) {
+      if (
+        message.authorId !== snowflakeToBigint(OWNER_ID) ||
+        message.content !== "!starttests"
+      )
+        return;
+
+      logMemory();
+      setInterval(logMemory, 60000);
     },
   },
 });
 
-let counter = 1;
+let ddcounter = 1;
 function logMemory() {
   const usage = Deno.memoryUsage();
   const bytes = 1000000;
-  console.log(
-    `[${counter} discordeno] Memory Usage RSS: ${
-      usage.rss / bytes
-    }MB Heap Used: ${usage.heapUsed / bytes}MB Heap Total: ${
-      usage.heapTotal / bytes
-    }MB | Guilds: ${cache.guilds.size} | Members: ${
-      cache.members.size
-    } | Messages: ${cache.messages.size} | Channels: ${cache.channels.size}`
-  );
-  counter++;
+  // console.log(
+  //   `[${counter} discordeno] Memory Usage RSS: ${
+  //     usage.rss / bytes
+  //   }MB Heap Used: ${usage.heapUsed / bytes}MB Heap Total: ${
+  //     usage.heapTotal / bytes
+  //   }MB | Guilds: ${cache.guilds.size} | Members: ${
+  //     cache.members.size
+  //   } | Messages: ${cache.messages.size} | Channels: ${cache.channels.size}`
+  // );
+  console.log({
+    minutes: ddcounter,
+    rss: usage.rss / bytes,
+    heapUsed: usage.heapUsed / bytes,
+    heapTotal: usage.heapTotal / bytes,
+    lib: "discordeno",
+    guilds: cache.guilds.size,
+    members: cache.members.size,
+    messages: cache.messages.size,
+    channels: cache.channels.size,
+  });
+  ddcounter++;
 }
