@@ -35,11 +35,9 @@ university
     universityTime = SHARD_READY(id, universityTime);
   })
   .on("messageCreate", (message) => {
-    if (
-      message.authorId !== snowflakeToBigint(OWNER_ID) ||
-      message.content !== "!starttests"
-    )
-      return;
+    if (message.authorId !== snowflakeToBigint(OWNER_ID)) return;
+    if (message.content !== "!starttests") return;
+    console.log("message came", 2);
 
     universitycounter = logMemory(
       Deno.memoryUsage(),

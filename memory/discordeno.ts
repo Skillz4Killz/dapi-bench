@@ -2,6 +2,7 @@ import {
   startBot,
   cache,
   snowflakeToBigint,
+  ws,
 } from "https://deno.land/x/discordeno/mod.ts";
 import { TOKEN, OWNER_ID } from "../configs-deno.ts";
 import { READY, SHARD_READY, logMemory } from "../utils/events-deno.ts";
@@ -9,6 +10,8 @@ import { READY, SHARD_READY, logMemory } from "../utils/events-deno.ts";
 const ddStarted = Date.now();
 let ddTime = Date.now();
 let ddcounter = 0;
+
+ws.spawnShardDelay = 2700;
 
 startBot({
   token: TOKEN,
