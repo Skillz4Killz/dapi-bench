@@ -6,8 +6,8 @@ import {
 import { TOKEN, OWNER_ID } from "../configs-deno.ts";
 import { READY, SHARD_READY, logMemory } from "../utils/events-deno.ts";
 
-const started = Date.now();
-let time = Date.now();
+const ddStarted = Date.now();
+let ddTime = Date.now();
 let ddcounter = 0;
 
 startBot({
@@ -26,13 +26,10 @@ startBot({
   ],
   eventHandlers: {
     ready() {
-      READY(started);
+      READY(ddStarted);
     },
     shardReady(id) {
-      time = SHARD_READY(id, time);
-      // const here = Date.now();
-      // console.log(`SHARD READY`, id, (here - time) / 1000, "seconds to start.");
-      // time = here;
+      ddTime = SHARD_READY(id, ddTime);
     },
     messageCreate(message) {
       if (
@@ -41,7 +38,7 @@ startBot({
       )
         return;
 
-      logMemory(
+      ddcounter = logMemory(
         Deno.memoryUsage(),
         ddcounter,
         "discordeno",
@@ -51,7 +48,7 @@ startBot({
         cache.channels.size
       );
       setInterval(() => {
-        logMemory(
+        ddcounter = logMemory(
           Deno.memoryUsage(),
           ddcounter,
           "discordeno",

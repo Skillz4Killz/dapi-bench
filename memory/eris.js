@@ -38,7 +38,7 @@ bot.on("message", (message) => {
   if (message.author.id !== OWNER_ID || message.content !== "!starttests")
     return;
 
-  logMemory(
+  erisCounter = logMemory(
     process.memoryUsage(),
     erisCounter,
     "eris",
@@ -48,7 +48,7 @@ bot.on("message", (message) => {
     0
   );
   setInterval(() => {
-    logMemory(
+    erisCounter = logMemory(
       process.memoryUsage(),
       erisCounter,
       "eris",

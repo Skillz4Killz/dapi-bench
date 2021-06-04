@@ -19,9 +19,25 @@ client
     if (message.author.id !== OWNER_ID || message.content !== "!starttests")
       return;
 
-    logMemory(Deno.memoryUsage(), harmonyCounter, "harmony", 0, 0, 0, 0);
+    harmonyCounter = logMemory(
+      Deno.memoryUsage(),
+      harmonyCounter,
+      "harmony",
+      0,
+      0,
+      0,
+      0
+    );
     setInterval(() => {
-      logMemory(Deno.memoryUsage(), harmonyCounter, "harmony", 0, 0, 0, 0);
+      harmonyCounter = logMemory(
+        Deno.memoryUsage(),
+        harmonyCounter,
+        "harmony",
+        0,
+        0,
+        0,
+        0
+      );
     }, 60000);
   });
 

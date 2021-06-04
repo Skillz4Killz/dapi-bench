@@ -36,7 +36,7 @@ client
     if (message.author.id !== OWNER_ID || message.content !== "!starttests")
       return;
 
-    logMemory(
+    djsCounter = logMemory(
       process.memoryUsage(),
       djsCounter,
       "discord.js",
@@ -45,7 +45,17 @@ client
       0,
       client.channels.cache.size
     );
-    setInterval(logMemory, 60000);
+    setInterval(() => {
+      djsCounter = logMemory(
+        process.memoryUsage(),
+        djsCounter,
+        "discord.js",
+        client.guilds.cache.size,
+        client.users.cache.size,
+        0,
+        client.channels.cache.size
+      );
+    }, 60000);
   });
 
 client.login(TOKEN);
