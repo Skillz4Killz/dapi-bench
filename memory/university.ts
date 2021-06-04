@@ -33,8 +33,24 @@ university
     if (message.author.id !== OWNER_ID || message.content !== "!starttests")
       return;
 
-    universitycounter = logMemory(Deno.memoryUsage(), universitycounter, "harmony", 0, 0, 0, 0);
+    universitycounter = logMemory(
+      Deno.memoryUsage(),
+      universitycounter,
+      "university",
+      university.guilds.size,
+      university.members.size,
+      university.messages.size,
+      university.channels.size
+    );
     setInterval(() => {
-      universitycounter = logMemory(Deno.memoryUsage(), universitycounter, "harmony", 0, 0, 0, 0);
+      universitycounter = logMemory(
+        Deno.memoryUsage(),
+        universitycounter,
+        "university",
+        university.guilds.size,
+        university.members.size,
+        university.messages.size,
+        university.channels.size
+      );
     }, 60000);
   });
