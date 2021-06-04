@@ -1,6 +1,6 @@
 import { Client, GatewayIntents } from "https://deno.land/x/harmony/mod.ts";
 import { TOKEN, OWNER_ID } from "../configs-deno.ts";
-import { READY, SHARD_READY } from "../utils/events-deno";
+import { READY, SHARD_READY } from "../utils/events-deno.ts";
 
 const client = new Client({ token: TOKEN });
 
