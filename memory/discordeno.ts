@@ -11,8 +11,6 @@ const ddStarted = Date.now();
 let ddTime = Date.now();
 let ddcounter = 0;
 
-ws.spawnShardDelay = 2700;
-
 startBot({
   token: TOKEN,
   intents: [
