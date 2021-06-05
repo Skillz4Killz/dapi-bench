@@ -8,7 +8,24 @@ It is impossible to have everyone test on the same system because each computer 
 
 ## Results
 
-TODO: INSERT SCREENSHOTS OF BENCHMARKS HERE
+This benchmark comparison was run using a bot on approximately 10,000 servers. 
+
+### Startup Times
+
+To make it easier to view, I have split the terminals into two groups. Group 1 is NodeJS libraries and Group 2 is Deno libraries.
+
+![image](https://user-images.githubusercontent.com/23035000/120896894-9440d880-c5f1-11eb-8550-89f608340af6.png)
+> Note: The error in eris is normal handling. This is not a bad thing. Sometimes discord will request at random to reconnect by requesting a reset.
+
+![image](https://user-images.githubusercontent.com/23035000/120896898-999e2300-c5f1-11eb-9c54-7a0b4e41b0e1.png)
+
+### Memory Management 
+
+TODO: Insert results, pending because i need to be free for 3-4hrs straight to run this to prevent codespaces from closing terminals due to inactivity.
+
+## Analysis
+
+// TODO: Once the benchmarks are complete we can add an analysis to it.
 
 ## Setup
 
