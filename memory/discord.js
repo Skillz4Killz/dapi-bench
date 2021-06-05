@@ -58,7 +58,8 @@ djs
         ),
         djs.channels.cache.size
       );
-    }, 60000);
+      // }, 60000);
+    }, 10000);
   });
 
 djs.login(TOKEN);

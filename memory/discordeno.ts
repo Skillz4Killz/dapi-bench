@@ -39,9 +39,9 @@ startBot({
       )
         return;
 
-      ddcounter = logMemory(
+      logMemory(
         Deno.memoryUsage(),
-        ddcounter,
+        ddcounter++,
         "discordeno",
         cache.guilds.size,
         cache.members.size,
@@ -49,9 +49,9 @@ startBot({
         cache.channels.size
       );
       setInterval(() => {
-        ddcounter = logMemory(
+        logMemory(
           Deno.memoryUsage(),
-          ddcounter,
+          ddcounter++,
           "discordeno",
           cache.guilds.size,
           cache.members.size,

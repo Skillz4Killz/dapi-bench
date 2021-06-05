@@ -34,5 +34,5 @@ exports.logMemory = function (
     messages,
     channels,
   });
-  return counter++;
+  return ++counter;
 };

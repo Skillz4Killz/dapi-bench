@@ -3,11 +3,10 @@ const { GatewayIntents } = require("detritus-client-socket/lib/constants");
 const { TOKEN, OWNER_ID } = require("../configs-node");
 const { READY, SHARD_READY, logMemory } = require("../utils/events-node");
 
-
-const cache = {counter: 0, started: Date.now(), time: Date.now()};
+const cache = { counter: 0, started: Date.now(), time: Date.now() };
 
 const commandClient = new CommandClient(TOKEN, {
-  prefix: '!',
+  prefix: "!",
   gateway: {
     intents: [
       GatewayIntents.DIRECT_MESSAGE_REACTIONS,
@@ -24,10 +23,9 @@ const commandClient = new CommandClient(TOKEN, {
   },
 });
 
-
 let started = false;
 commandClient.add({
-  name: 'starttests',
+  name: "starttests",
   onBefore: (context) => context.userId === OWNER_ID,
   run: (context) => {
     logCacheSizes(context.client);
@@ -40,15 +38,14 @@ commandClient.add({
   },
 });
 
-
 (async () => {
   const cluster = await commandClient.run();
-  cluster.on('ready', () => {
+  cluster.on("ready", () => {
     READY(cache.started);
   });
 
   let shardsLoaded = 0;
-  cluster.on('gatewayReady', (event) => {
+  cluster.on("gatewayReady", (event) => {
     shardsLoaded++;
 
     cache.time = SHARD_READY(event.shard.shardId, cache.time);
@@ -60,25 +57,24 @@ commandClient.add({
   console.log(`Client has loaded with a shard count of ${cache.shardCount}`);
 })();
 
-
 function logCacheSizes(shardClient) {
-  const counts = {channels: 0, guilds: 0, members: 0, messages: 0, users: 0};
+  const counts = { channels: 0, guilds: 0, members: 0, messages: 0, users: 0 };
   if (shardClient.cluster) {
-    for (let [shardId, shard] of shard.cluster) {
-      addCacheSizes(shard, counts);
+    for (let [shardId, shard] of shardClient.cluster.shards) {
+       (shard, counts);
     }
   } else {
     addCacheSizes(shardClient, counts);
   }
-  return cache.counter = logMemory(
+  return (cache.counter = logMemory(
     process.memoryUsage(),
     cache.counter,
-    'detritus',
+    "detritus",
     counts.channels,
     counts.guilds,
     counts.members,
-    counts.messages,
-  );
+    counts.messages
+  ));
 }
 
 function addCacheSizes(shard, counts) {
