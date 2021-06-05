@@ -8,6 +8,8 @@ It is impossible to have everyone test on the same system because each computer 
 
 ## Results
 
+This benchmark comparison was run using a bot on approximately 10,000 servers. 
+
 ### Startup Times
 
 To make it easier to view, I have split the terminals into two groups. Group 1 is NodeJS libraries and Group 2 is Deno libraries.
