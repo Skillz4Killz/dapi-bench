@@ -44,8 +44,8 @@ bot.on("messageCreate", (message) => {
     "eris",
     bot.guilds.size,
     bot.users.size,
-    0,
-    0
+    bot.privateChannels.reduce((a, b) => a + b.messages.size, 0) + bot.guilds.reduce((a, b) => a + (b.messages?.size || 0), 0),
+    bot.privateChannels.size + Object.keys(bot.channelGuildMap).length
   );
   setInterval(() => {
     erisCounter = logMemory(
@@ -54,8 +54,8 @@ bot.on("messageCreate", (message) => {
       "eris",
       bot.guilds.size,
       bot.users.size,
-      0,
-      0
+      bot.privateChannels.reduce((a, b) => a + b.messages.size, 0) + bot.guilds.reduce((a, b) => a + (b.messages?.size || 0), 0),
+      bot.privateChannels.size + Object.keys(bot.channelGuildMap).length
     );
   }, 60000);
 });
