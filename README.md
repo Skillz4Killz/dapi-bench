@@ -21,6 +21,10 @@ To make it easier to view, I have split the terminals into two groups. Group 1 i
 
 TODO: Insert results, pending because i need to be free for 3-4hrs straight to run this to prevent codespaces from closing terminals due to inactivity.
 
+## Analysis
+
+// TODO: Once the benchmarks are complete we can add an analysis to it.
+
 ## Setup
 
 1. Create `configs-deno.ts` file and paste the following:
