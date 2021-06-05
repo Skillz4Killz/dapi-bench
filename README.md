@@ -8,7 +8,11 @@ It is impossible to have everyone test on the same system because each computer 
 
 ## Results
 
-TODO: INSERT SCREENSHOTS OF BENCHMARKS HERE
+### Startup Times
+
+![image](https://user-images.githubusercontent.com/23035000/120896894-9440d880-c5f1-11eb-8550-89f608340af6.png)
+![image](https://user-images.githubusercontent.com/23035000/120896898-999e2300-c5f1-11eb-9c54-7a0b4e41b0e1.png)
+
 
 ## Setup
 
