@@ -196,7 +196,7 @@ There were a few things I noticed during the test.
 
 In terms of memory management, based on the benchmarks, once again the library performing the best in my opinion, is Discordeno.
 
-There are a few key things to note when it comes to understanding how this test was conducted. This is not a test of memory storage but the management of memory. This means that libraries were not storing the exact same values at all given points in time. Ideally, I would love for someone to add that benchmark as well but that is incredily complex to achieve. I
+There are a few key things to note when it comes to understanding how this test was conducted. This is not a test of memory storage but the management of memory. This means that libraries were not storing the exact same values at all given points in time. Ideally, I would love for someone to add that benchmark as well but that is incredily complex to achieve.
 
 To understand why each library is slightly different in statistics of their cached values, it is important to look from the starting point. For example, Discordeno was the first library that started up. Then Harmony was started which took 80 seconds, this meant Discordeno already received 80 seconds worth of events. Then Detritus > Discord.js and finally Eris was started up. This means that certain libraries had more events than other. This was the only possible way to make sure that all libraries were experiencing the similar events as close as possible. If you look closely at the results you will see this in effect where Discordeno has more users/messages in cache than other libraries. This makes sense. This is NOT an issue with the other libraries!
 
