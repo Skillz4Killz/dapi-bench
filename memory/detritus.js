@@ -68,7 +68,7 @@ function logCacheSizes(shardClient) {
     cache.counter,
     "detritus",
     counts.guilds,
-    counts.members,
+    counts.users,
     counts.messages,
     counts.channels
   ));
