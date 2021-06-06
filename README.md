@@ -111,15 +111,11 @@ If you are using Discordeno:
 
 **Harmony**
 
-If you are using Harmony, instead of Discordeno:
-
 - 10,000 servers, with a total of **81.543 seconds**, Harmony is **24.281 seconds** slower.
 - 100,000 servers, with a total of **815.43 seconds**, Harmony is **242.81** seconds slower which is about **4 minute**.
 - 1,000,000 servers, with a total of **8154.3 seconds**, Harmony is **7796.4125** seconds slower which is about **129.9402 minutes**.
 
 **Detritus**
-
-If you are using Detritus, instead of Discordeno:
 
 - 10,000 servers, with a total of **79.232 seconds**, Detritus is **24.281 seconds** slower.
 - 100,000 servers, with a total of **815.43 seconds**, Detritus is **242.81 seconds** slower which is about **4 minutes**.
