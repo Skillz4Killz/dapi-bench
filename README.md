@@ -38,9 +38,7 @@ To make it easier to view, I have split the terminals into two groups. Group 1 i
 
 The following data shows the first 5 minutes only. For the full 2 hour comparison please view it on our graphs.
 
-> Note: This graph is representative of our first test which. A new graph will be posted once these benchmarks are complete.
-
-[First 2hr Benchmarks](https://discordeno-benchmarks-graphs.pages.dev/)
+[2hr Benchmarks](https://discordeno-benchmarks-graphs.pages.dev/)
 
 | Library    | Minutes After Startup | RSS        | Heap Used  | Heap Total |
 | ---------- | --------------------- | ---------- | ---------- | ---------- |
