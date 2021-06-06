@@ -44,7 +44,8 @@ bot.on("messageCreate", (message) => {
     "eris",
     bot.guilds.size,
     bot.users.size,
-    bot.privateChannels.reduce((a, b) => a + b.messages.size, 0) + bot.guilds.reduce((a, b) => a + (b.messages?.size || 0), 0),
+    bot.privateChannels.reduce((a, b) => a + b.messages.size, 0) +
+      bot.guilds.reduce((a, b) => a + (b.channels.reduce((c, d) => c + (d.messages?.size || 0), 0) || 0), 0),
     bot.privateChannels.size + Object.keys(bot.channelGuildMap).length
   );
   setInterval(() => {
@@ -54,7 +55,8 @@ bot.on("messageCreate", (message) => {
       "eris",
       bot.guilds.size,
       bot.users.size,
-      bot.privateChannels.reduce((a, b) => a + b.messages.size, 0) + bot.guilds.reduce((a, b) => a + (b.messages?.size || 0), 0),
+      bot.privateChannels.reduce((a, b) => a + b.messages.size, 0) +
+        bot.guilds.reduce((a, b) => a + (b.channels.reduce((c, d) => c + (d.messages?.size || 0), 0) || 0), 0),
       bot.privateChannels.size + Object.keys(bot.channelGuildMap).length
     );
   }, 60000);

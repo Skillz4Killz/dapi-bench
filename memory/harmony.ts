@@ -9,7 +9,7 @@ const harmony = new Client({ token: TOKEN });
 
 const harmonyStarted = Date.now();
 let harmonyTime = Date.now();
-let harmonyCounter = 1;
+let harmonyCounter = 0;
 
 harmony
   .on("ready", () => {
