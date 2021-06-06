@@ -3,7 +3,7 @@ import {
   cache,
   snowflakeToBigint,
   ws,
-} from "https://deno.land/x/discordeno/mod.ts";
+} from "https://deno.land/x/discordeno@11.0.0/mod.ts";
 import { TOKEN, OWNER_ID } from "../configs-deno.ts";
 import { READY, SHARD_READY, logMemory } from "../utils/events-deno.ts";
 
