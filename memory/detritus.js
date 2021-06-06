@@ -40,16 +40,13 @@ commandClient.add({
 
 (async () => {
   const cluster = await commandClient.run();
-  cluster.on("ready", () => {
-    READY(cache.started);
-  });
 
   let shardsLoaded = 0;
   cluster.on("gatewayReady", (event) => {
     shardsLoaded++;
 
     cache.time = SHARD_READY(event.shard.shardId, cache.time);
-    if (shardsLoaded === cluster.shards.length) {
+    if (shardsLoaded === cluster.shardCount) {
       READY(cache.started);
     }
   });
@@ -61,7 +58,7 @@ function logCacheSizes(shardClient) {
   const counts = { channels: 0, guilds: 0, members: 0, messages: 0, users: 0 };
   if (shardClient.cluster) {
     for (let [shardId, shard] of shardClient.cluster.shards) {
-       (shard, counts);
+      addCacheSizes(shard, counts);
     }
   } else {
     addCacheSizes(shardClient, counts);
