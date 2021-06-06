@@ -292,7 +292,7 @@ I have not done a deep dive of every library to determine each and every differe
 
 - Discordeno implements BigInts instead of Strings for any snowflakes. This saves quite a lot of memory.
 - Discordeno does not store booleans, instead it opts for storing bitwise flags.
-- Discordeno does not store avatar/icon has strings but instead stores them as BigInts.
+- Discordeno does not store avatar/icon hashes as strings but instead stores them as BigInts.
 - Discordeno stores discriminators as a Number not a string.
 - Discordeno is written in a functional no-class based oop design. A great read [object-oriented-programming-the-trillion-dollar-disaster](https://betterprogramming.pub/object-oriented-programming-the-trillion-dollar-disaster-92a4b666c7c7). I have not been able to verify this as a main reason yet, but as shown by other projects who have switched from classes to no classes.
 
