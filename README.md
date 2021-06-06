@@ -272,6 +272,10 @@ I would love developers to reach out and implement another test for that benchma
 
 Discord.JS and Eris are relatively the same stability wise. Detritus seems to be increasing slightly every minute but at a much slower rate compared to Discord.JS and Eris. Harmony seems to have been very unstable throughout the test but over time, you can see a consistent increase in memory being used. 
 
+#### Best Cache Gathering
+
+Detritus is the best library in terms of which library can cache the most amount of data coming in from the same events. During the entire benchmark, it was consistently obvious that Detritus was increasing much more rapidly in cached users which goes to show that their handling of events and caching is better than everyone. At certain minutes you could easily see Detritus having gained several hundreds more users as opposed to the other libraries.
+
 #### Understanding The Drops
 
 There are times in each libraries results, you can see where memory slightly falls off. This happens for several reasons. One could be the garbage collector is running for that process at the moment and cleaned up some memory. Another reason could be that some sort of default sweeper is running that cleaned up some memory. 
