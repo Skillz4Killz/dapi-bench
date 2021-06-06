@@ -50,40 +50,58 @@ The following data shows the first 5 minutes only. For the full 2 hour compariso
 
 [2hr Benchmarks](https://discordeno-benchmarks-graphs.pages.dev/)
 
-The values below are using MB!
+| Minutes After Startup | RSS (MB)   | Heap Used (MB) | Heap Total (MB) |
+| --------------------- | ---------- | -------------- | --------------- |
+| 0                     | 243.892576 | 208.527604     | 244.674560      |
+| 1                     | 238.730048 | 202.430928     | 239.702016      |
+| 2                     | 246.497220 | 210.334392     | 248.807424      |
+| 3                     | 237.541040 | 203.351572     | 238.129152      |
+| 4                     | 246.08500  | 213.372156     | 246.587392      |
+| 5                     | 239.712308 | 205.979200     | 240.283648      |
 
-| Library    | Minutes After Startup | RSS        | Heap Used  | Heap Total |
-| ---------- | --------------------- | ---------- | ---------- | ---------- |
-| Discordeno | 0                     | 243.892576 | 208.527604 | 244.674560 |
-| Harmony    | 0                     | 331.283288 | 320.532956 | 331.857920 |
-| Detritus   | 0                     | 497.319936 | 433.726328 | 436.084736 |
-| Discord.js | 0                     | 570.343424 | 505.966424 | 509.554688 |
-| Eris       | 0                     | 513.777664 | 455.092768 | 457.932800 |
-| Discordeno | 1                     | 238.730048 | 202.430928 | 239.702016 |
-| Harmony    | 1                     | 410.668220 | 397.410528 | 411.328512 |
-| Detritus   | 1                     | 499.625984 | 435.320352 | 437.919744 |
-| Discord.js | 1                     | 571.633664 | 508.051432 | 509.554688 |
-| Eris       | 1                     | 517.099520 | 458.638728 | 460.759040 |
-| Discordeno | 2                     | 246.497220 | 210.334392 | 248.807424 |
-| Harmony    | 2                     | 408.612040 | 395.192964 | 409.112576 |
-| Detritus   | 2                     | 500.158464 | 436.297120 | 438.706176 |
-| Discord.js | 2                     | 572.534784 | 509.159704 | 511.651840 |
-| Eris       | 2                     | 520.23296  | 461.341152 | 464.371712 |
-| Discordeno | 3                     | 237.541040 | 203.351572 | 238.129152 |
-| Harmony    | 3                     | 412.030844 | 398.567096 | 412.950528 |
-| Detritus   | 3                     | 501.510144 | 436.986304 | 440.016896 |
-| Discord.js | 3                     | 574.488576 | 511.238200 | 513.748992 |
-| Eris       | 3                     | 525.213696 | 465.054648 | 467.460096 |
-| Discordeno | 4                     | 246.08500  | 213.372156 | 246.587392 |
-| Harmony    | 4                     | 413.367692 | 399.790460 | 414.212096 |
-| Detritus   | 4                     | 505.348096 | 438.864856 | 441.065472 |
-| Discord.js | 4                     | 584.093696 | 520.679512 | 522.452992 |
-| Eris       | 4                     | 527.712256 | 467.69908  | 470.810624 |
-| Discordeno | 5                     | 239.712308 | 205.979200 | 240.283648 |
-| Harmony    | 5                     | 413.902848 | 400.104840 | 414.736384 |
-| Detritus   | 5                     | 508.149760 | 439.632352 | 442.638336 |
-| Discord.js | 5                     | 586.240000 | 522.365640 | 524.288000 |
-| Eris       | 5                     | 530.649088 | 470.680552 | 473.636864 |
+**Harmony**
+
+| Minutes After Startup | RSS (MB)   | Heap Used (MB) | Heap Total (MB) |
+| --------------------- | ---------- | -------------- | --------------- |
+| 0                     | 331.283288 | 320.532956     | 331.857920      |
+| 1                     | 410.668220 | 397.410528     | 411.328512      |
+| 2                     | 408.612040 | 395.192964     | 409.112576      |
+| 3                     | 412.030844 | 398.567096     | 412.950528      |
+| 4                     | 413.367692 | 399.790460     | 414.212096      |
+| 5                     | 413.902848 | 400.104840     | 414.736384      |
+
+**Detritus**
+
+| Minutes After Startup | RSS (MB)   | Heap Used (MB) | Heap Total (MB) |
+| --------------------- | ---------- | -------------- | --------------- |
+| 0                     | 497.319936 | 433.726328     | 436.084736      |
+| 1                     | 499.625984 | 435.320352     | 437.919744      |
+| 2                     | 500.158464 | 436.297120     | 438.706176      |
+| 3                     | 501.510144 | 436.986304     | 440.016896      |
+| 4                     | 505.348096 | 438.864856     | 441.065472      |
+| 5                     | 508.149760 | 439.632352     | 442.638336      |
+
+**Discord.JS**
+
+| Minutes After Startup | RSS (MB)   | Heap Used (MB) | Heap Total (MB) |
+| --------------------- | ---------- | -------------- | --------------- |
+| 0                     | 570.343424 | 505.966424     | 509.554688      |
+| 1                     | 571.633664 | 508.051432     | 509.554688      |
+| 2                     | 572.534784 | 509.159704     | 511.651840      |
+| 3                     | 574.488576 | 511.238200     | 513.748992      |
+| 4                     | 584.093696 | 520.679512     | 522.452992      |
+| 5                     | 586.240000 | 522.365640     | 524.288000      |
+
+**Eris**
+
+| Minutes After Startup | RSS (MB)   | Heap Used (MB) | Heap Total (MB) |
+| --------------------- | ---------- | -------------- | --------------- |
+| 0                     | 513.777664 | 455.092768     | 457.932800      |
+| 1                     | 517.099520 | 458.638728     | 460.759040      |
+| 2                     | 520.23296  | 461.341152     | 464.371712      |
+| 3                     | 525.213696 | 465.054648     | 467.460096      |
+| 4                     | 527.712256 | 467.69908      | 470.810624      |
+| 5                     | 530.649088 | 470.680552     | 473.636864      |
 
 ## Analysis
 
@@ -186,9 +204,9 @@ Not only can you have the gateway implementation as a standalone process, you ca
 
 #### Shortcomings Noticed
 
-There were a few things I noticed during the test. 
+There were a few things I noticed during the test.
 
-- Discord.JS has an interesting 23 second load time on shard 5. I am not sure of the reason for this, my current assumption is that it happens because one of those servers may be huge and it takes a long time to set it up. Oddly enough, the next shard starts in <1 second so it is quite weird. 
+- Discord.JS has an interesting 23 second load time on shard 5. I am not sure of the reason for this, my current assumption is that it happens because one of those servers may be huge and it takes a long time to set it up. Oddly enough, the next shard starts in <1 second so it is quite weird.
 - Harmony also seems to have a spike in load time for certain shards. Sometimes, this will spike to 2-3 seconds higher than other shards. Detritus, Eris, and Discordeno are usually pretty consistent.
 - Detritus seems to spawn shards at random instead of a clean order. This makes it a bit annoying to be able to determine if a shard didn't spawn or not. It is not a huge deal, but would be nicer to have this sorted. Discord.JS also has this happen in a few rare instances. Not sure of the cause.
 - Harmony is the only lib that seems to emit shard readys even after all shards have gone ready. Not a big deal, but is interesting to see.
@@ -222,7 +240,7 @@ client.guilds.size
 (await harmony.guilds.array()).length,
 ```
 
-This design makes it much more complicated to use this library and slows down something as simple as checking cached values. Challenge yourself to see if you can figure out how to calculate the number of messages are cached using this design. Is it possible? Sure, but it is extremely complicated that even after asking the libraries developers I was not given a solution. 
+This design makes it much more complicated to use this library and slows down something as simple as checking cached values. Challenge yourself to see if you can figure out how to calculate the number of messages are cached using this design. Is it possible? Sure, but it is extremely complicated that even after asking the libraries developers I was not given a solution.
 
 The concern from this is, imagine you have a bot that shows your bots stats or about command that shows your cached values. This would mean you would have a 20-30 second delay for simple commands just to get that for 10,000 servers. But what if this scaled to 100,000 servers. This would now be 200-300 seconds or 3-5 minutes. If this rose to 1,000,000 servers you would be talking about a 30-50 minute delay.
 
@@ -268,13 +286,13 @@ Another intersting thing, we noticed about Harmony, was that in the start of the
 
 #### Stability
 
-If you look at the bigger picture for the duration of the 2 hours of testing, you will see that Discordeno appears to be the most stable when it comes to RSS. According to LogRocket article linked above, "If you suspect a memory leak in your application, chances are high that it could be a result of the uncapped increase in the app’s resident set size (RSS), which makes it rise without leveling off. As a result, the RSS becomes too high for the application to handle the workload, which could cause it to crash without an “out of memory” warning." This goes to hint that, Harmony, Detritus, Discord.js and Eris have built in memory leaks by default. Over time, they will continue to increase the amount of memory that they need. 
+If you look at the bigger picture for the duration of the 2 hours of testing, you will see that Discordeno appears to be the most stable when it comes to RSS. According to LogRocket article linked above, "If you suspect a memory leak in your application, chances are high that it could be a result of the uncapped increase in the app’s resident set size (RSS), which makes it rise without leveling off. As a result, the RSS becomes too high for the application to handle the workload, which could cause it to crash without an “out of memory” warning." This goes to hint that, Harmony, Detritus, Discord.js and Eris have built in memory leaks by default. Over time, they will continue to increase the amount of memory that they need.
 
 Most likely, the reason that these libraries have this infinitely growing memory usage is because they do not enable sweeping unused cached values. Infinitely growing memory usage is a leak. A lot of developers, are not aware of these options nor do they even know to enable them. I have personally met a developer who had a basic bot at 800MB on a single server by just leaving it online. More than likely, each library should be doing it's very best by default. This benchmark shows each library as is, no modifications, no nothing with the same intents. If some library, was caching members twice internally, it would not be a fair benchmark to then go and implement and optimized version of their library in order to benchmark it. Similarily, its also unfair for me to modify any other libraries defaults. Remember, this benchmark is a benchmark to show the how each library manages memory usage and not how each library stores memory using the same exact objects.
 
 I would love developers to reach out and implement another test for that benchmark that would share the same caching policies instead of the defaults. This is way to complicated to figure out for each library as I did not write those libraries. I have added an `memory/optimized` folder showing the caching policies we can all share. However, I do not believe that these new tests will show much of a difference for a few reasons. The start of the benchmarks for the first few minutes where no library will have been able to remove anything show the differences being almost the exact same as during the entire benchmark. Because of this I have also taken the time to showcase/highlight the first 5 minutes above in a table.
 
-Discord.JS and Eris are relatively the same stability wise. Detritus seems to be increasing slightly every minute but at a much slower rate compared to Discord.JS and Eris. Harmony seems to have been very unstable throughout the test but over time, you can see a consistent increase in memory being used. 
+Discord.JS and Eris are relatively the same stability wise. Detritus seems to be increasing slightly every minute but at a much slower rate compared to Discord.JS and Eris. Harmony seems to have been very unstable throughout the test but over time, you can see a consistent increase in memory being used.
 
 #### Best Cache Gathering
 
@@ -282,9 +300,9 @@ Detritus is the best library in terms of which library can cache the most amount
 
 #### Understanding The Drops
 
-There are times in each libraries results, you can see where memory slightly falls off. This happens for several reasons. One could be the garbage collector is running for that process at the moment and cleaned up some memory. Another reason could be that some sort of default sweeper is running that cleaned up some memory. 
+There are times in each libraries results, you can see where memory slightly falls off. This happens for several reasons. One could be the garbage collector is running for that process at the moment and cleaned up some memory. Another reason could be that some sort of default sweeper is running that cleaned up some memory.
 
-There are two big drops we should probably take a minute to discuss. 
+There are two big drops we should probably take a minute to discuss.
 
 - At minute 33 of the benchmark, Harmony drops from 443MB to 229MB. I have been unable to determine what caused this especially when right afterwards, it seemed to spike even higher then before.
 
@@ -310,10 +328,9 @@ Thank you for taking the time to read this. Thank you to those who helped contri
 
 ## Final Notes
 
-Rust > *. There is a Rust library going even more above and beyond but their developer asked me not to mention them in this so I have respected their wish and left them out of this analysis. After that I decided to keep this benchmark to only JS/TS libraries.
+Rust > \*. There is a Rust library going even more above and beyond but their developer asked me not to mention them in this so I have respected their wish and left them out of this analysis. After that I decided to keep this benchmark to only JS/TS libraries.
 
 > Note: There is no 1 perfect library! Discordeno is not some magical wonder drug that no one else can replicate. It is just code. With JavaScript/TypeScript, you can accomplish any of this as well in those other libraries. Anyone who wishes can optimize any of these libraries and achieve the same results. The goal of these benchmarks and analysis is to compare and contrast which is the ideal library for scaling in terms of the libraries default behaviors, so it does not require the hackwork or forking and modifying but that it just works from the get go.
-
 
 ## Setup
 
