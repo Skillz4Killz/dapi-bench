@@ -224,7 +224,7 @@ The concern from this is, imagine you have a bot that shows your bots stats or a
 
 There is a great [article by log rocket](https://blog.logrocket.com/understanding-memory-leaks-node-js-apps/) that helps explain this in a really easy to understand way.
 
-TODO: INSERT IMAGE
+![image](https://user-images.githubusercontent.com/23035000/120937860-ebbc7280-c6dd-11eb-84cd-5b4f3bce633a.png)
 
 #### Instant Insights
 
@@ -289,6 +289,8 @@ I have not done a deep dive of every library to determine each and every differe
 - Discordeno does not store avatar/icon has strings but instead stores them as BigInts.
 - Discordeno stores discriminators as a Number not a string.
 - Discordeno is written in a functional no-class based oop design. A great read [object-oriented-programming-the-trillion-dollar-disaster](https://betterprogramming.pub/object-oriented-programming-the-trillion-dollar-disaster-92a4b666c7c7). I have not been able to verify this as a main reason yet, but as shown by other projects who have switched from classes to no classes.
+
+![image](https://user-images.githubusercontent.com/23035000/120937834-bf085b00-c6dd-11eb-8e0b-426a97394bd7.png)
 
 > Note: There is no 1 perfect library! Discordeno is not some magical wonder drug that no one else can replicate. It is just code. With JavaScript/TypeScript, you can accomplish any of this as well in those other libraries. Anyone who wishes can optimize any of these libraries and achieve the same results. The goal of these benchmarks and analysis is to compare and contrast which is the ideal library for scaling in terms of the libraries default behaviors, so it does not require the hackwork or forking and modifying but that it just works from the get go.
 
