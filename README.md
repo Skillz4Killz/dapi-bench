@@ -20,6 +20,14 @@ Discord.JS: [Github](https://github.com/discordjs/discord.js) [Discord Server](h
 
 Eris: [Github](https://github.com/abalabahaha/eris) [Discord Server](https://discord.gg/eris)
 
+---
+
+- Discordeno 11.0.0 was used.
+- Harmony v2.0.0-rc2 was used. The stable v1 was not useable at this scale as it was taking almost 10 minutes to load per shard. Instead the latest release candidate of v2 was used after discussing with the library developers.
+- Discord.js 12.5.3 was used.
+- Detritus 0.15.0 was used.
+- Eris 0.15.1 was used.
+
 ## Results
 
 This benchmark comparison was run using a bot on approximately 10,000 servers.
