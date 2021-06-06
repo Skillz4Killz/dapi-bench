@@ -11,9 +11,13 @@ It is impossible to have everyone test on the same system because each computer 
 ## Libraries
 
 Discordeno: [Github](https://github.com/discordeno/discordeno) [Discord Server](https://discord.gg/ddeno)
+
 Harmony: [Github](https://github.com/harmonyland/harmony) [Discord Server](https://discord.gg/harmony)
+
 Detritus: [Github](https://github.com/detritusjs/client) [Discord Server](https://discord.gg/detritus)
+
 Discord.JS: [Github](https://github.com/discordjs/discord.js) [Discord Server](https://discord.gg/djs)
+
 Eris: [Github](https://github.com/abalabahaha/eris) [Discord Server](https://discord.gg/eris)
 
 ## Results
@@ -188,7 +192,116 @@ There were a few things I noticed during the test.
 
 ### Analyzing The Memory Management
 
-// TODO: add once the benchmarks are done
+In terms of memory management, based on the benchmarks, once again the library performing the best in my opinion, is Discordeno.
+
+There are a few key things to note when it comes to understanding how this test was conducted. This is not a test of memory storage but the management of memory. This means that libraries were not storing the exact same values at all given points in time. Ideally, I would love for someone to add that benchmark as well but that is incredily complex to achieve. I
+
+To understand why each library is slightly different in statistics of their cached values, it is important to look from the starting point. For example, Discordeno was the first library that started up. Then Harmony was started which took 80 seconds, this meant Discordeno already received 80 seconds worth of events. Then Detritus > Discord.js and finally Eris was started up. This means that certain libraries had more events than other. This was the only possible way to make sure that all libraries were experiencing the similar events as close as possible. If you look closely at the results you will see this in effect where Discordeno has more users/messages in cache than other libraries. This makes sense. This is NOT an issue with the other libraries!
+
+However, there is a issue with the Harmony library. They are missing several thousands of users altogether from the start to the end of the benchmark. After speaking to the developers of the library, I was able to confirm that they do not do any optimizations but this is indeed an issue in the library itself.
+
+This meant that it was slightly acceptable that the libraries that were started up first, were going to have a slightly higher memory usage because they received a little more events.
+
+#### Speed Performance
+
+Interestingly, we noticed that all of the libraries performed almost exactly the same except for Harmony. Harmony was a lot slower compared to the others, I would estimate it was almost 20-30 seconds slower to log the values. There may be several reasons behind this but my main assumption after looking at the code is the design of the libraries cache managers. The only way to determine the amount of items in cache is to do a hackish solution since there is no quick lookup like other libraries. For example, to get the total guilds in cache:
+
+```ts
+// Discordeno
+cache.guilds.size
+// Discord.js
+client.guilds.size
+
+// Harmony
+(await harmony.guilds.array()).length,
+```
+
+This design makes it much more complicated to use this library and slows down something as simple as checking cached values. Challenge yourself to see if you can figure out how to calculate the number of messages are cached using this design. Is it possible? Sure, but it is extremely complicated that even after asking the libraries developers I was not given a solution. 
+
+The concern from this is, imagine you have a bot that shows your bots stats or about command that shows your cached values. This would mean you would have a 20-30 second delay for simple commands just to get that for 10,000 servers. But what if this scaled to 100,000 servers. This would now be 200-300 seconds or 3-5 minutes. If this rose to 1,000,000 servers you would be talking about a 30-50 minute delay.
+
+#### Understanding The Terminology
+
+There is a great [article by log rocket](https://blog.logrocket.com/understanding-memory-leaks-node-js-apps/) that helps explain this in a really easy to understand way.
+
+TODO: INSERT IMAGE
+
+#### Instant Insights
+
+At first glance, it can be understood that the libraries that best manage memory at the start are as follows:
+
+1. Discordeno
+2. Harmony
+3. Detritus
+4. Eris
+5. Discord.JS
+
+However, as we take a closer look at the data values for the initial values, we notice that Harmony is missing thousands of users. At the start, harmony had only cached `456` users. As a comparison:
+
+Discordeno: `2624`
+
+Harmony: `456`
+
+Detritus: `2299`
+
+Discord.JS: `1940`
+
+Eris: `1671`
+
+Please, note once again the difference here between the 4 libraries is understandable because the list shows the order in which they started and received more events than the lower ones. However, Harmony is way too low and is missing 1000s of users from the get go. And is always lower than the libraries even after it. This means that Harmony is not properly caching data that are coming in from the websocket. The concern here is that if this library is reflecting the cached values correctly, as discussed with the library developer. Since Harmony has almost 1/4 the users of other libraries, how much higher would the library be if it was caching all users equally? The only reasonable assumption that in terms of memory management at the start the most accurate order would be:
+
+1. Discordeno
+2. Detritus
+3. Eris
+4. Discord.JS
+5. Harmony
+
+---
+
+Another intersting thing, we noticed about Harmony, was that in the start of the benchmarks, it was the only library to skyrocket in terms of memory compared to the others that remained relatively stable. Harmony spiked almost 100MB of memory in the first minute.
+
+#### Stability
+
+If you look at the bigger picture for the duration of the 2 hours of testing, you will see that Discordeno appears to be the most stable when it comes to RSS. According to LogRocket article linked above, "If you suspect a memory leak in your application, chances are high that it could be a result of the uncapped increase in the app’s resident set size (RSS), which makes it rise without leveling off. As a result, the RSS becomes too high for the application to handle the workload, which could cause it to crash without an “out of memory” warning." This goes to hint that, Harmony, Detritus, Discord.js and Eris have built in memory leaks by default. Over time, they will continue to increase the amount of memory that they need. 
+
+In my opinion, the reason that these libraries have this infinitely growing memory usage is because they do not enable sweeping unused cached values. Infinitely growing memory usage is a leak. A lot of developers, are not aware of these options nor do they even know to enable them. I have personally met a developer who had a basic bot at 800MB on a single server by just leaving it online. In my opinion, each library should be doing it's very best by default. This benchmark shows each library as is, no modifications, no nothing with the same intents. If some library, was caching members twice internally, it would not be a fair benchmark to then go and implement and optimized version of their library in order to benchmark it. Similarily, its also unfair for me to modify any other libraries defaults. Remember, this benchmark is a benchmark to show the how each library manages memory usage and not how each library stores memory using the same exact objects.
+
+I would love developers to reach out and implement another test for that benchmark that would share the same caching policies instead of the defaults. This is way to complicated to figure out for each library as I did not write those libraries. I have added an `memory/optimized` folder showing the caching policies we can all share. However, I do not believe that these new tests will show much of a difference for a few reasons. The start of the benchmarks for the first few minutes where no library will have been able to remove anything show the differences being almost the exact same as during the entire benchmark. Because of this I have also taken the time to showcase/highlight the first 5 minutes above in a table.
+
+Discord.JS and Eris are relatively the same stability wise. Detritus seems to be increasing slightly every minute but at a much slower rate compared to Discord.JS and Eris. Harmony seems to have been very unstable throughout the test but over time, you can see a consistent increase in memory being used. 
+
+#### Understanding The Drops
+
+There are times in each libraries results, you can see where memory slightly falls off. This happens for several reasons. One could be the garbage collector is running for that process at the moment and cleaned up some memory. Another reason could be that some sort of default sweeper is running that cleaned up some memory. 
+
+There are two big drops we should probably take a minute to discuss. 
+
+- At minute 33 of the benchmark, Harmony drops from 443MB to 229MB. I have been unable to determine what caused this especially when right afterwards, it seemed to spike even higher then before.
+
+- At minute 58 of the benchmark, Discordeno drops from 234MB to 101MB. This is reflecting the guilds sweeper running. Discordeno has a feature I call dispatchRequirements which allows us to determine any unused data in cache and remove them. This allows us to remove almost 85% of the data in memory. When this data is needed again, Discordeno dispatchRequirements triggers allowing it to be added back so you as the end user has no effect.
+
+#### Analyzing The Differences
+
+I have not done a deep dive of every library to determine each and every difference in every library to understand why each library has different amounts of memory. I have noticed a few things that were recommended to me by a friend.
+
+- Discordeno implements BigInts instead of Strings for any snowflakes. This saves quite a lot of memory.
+- Discordeno does not store booleans, instead it opts for storing bitwise flags.
+- Discordeno does not store avatar/icon has strings but instead stores them as BigInts.
+- Discordeno stores discriminators as a Number not a string.
+- Discordeno is written in a functional no-class based oop design. A great read [object-oriented-programming-the-trillion-dollar-disaster](https://betterprogramming.pub/object-oriented-programming-the-trillion-dollar-disaster-92a4b666c7c7). I have not been able to verify this as a main reason yet, but as shown by other projects who have switched from classes to no classes.
+
+> Note: There is no 1 perfect library! Discordeno is not some magical wonder drug that no one else can replicate. It is just code. With JavaScript/TypeScript, you can accomplish any of this as well in those other libraries. Anyone who wishes can optimize any of these libraries and achieve the same results. The goal of these benchmarks and analysis is to compare and contrast which is the ideal library for scaling in terms of the libraries default behaviors, so it does not require the hackwork or forking and modifying but that it just works from the get go.
+
+## Thank You
+
+Thank you for taking the time to read this. Thank you to those who helped contribute to this. Thank you to those who helped me think through this by helping me bounce the ideas off of you. Thank you to everyone who helped in anyway that I did not remember. Thank you Discord for making an awesome API.
+
+## Final Notes
+
+Rust > *. There is a Rust library going even more above and beyond but their developer asked me not to mention them in this so I have respected their wish and left them out of this analysis. After that I decided to keep this benchmark to only JS/TS libraries.
+
+> Note: There is no 1 perfect library! Discordeno is not some magical wonder drug that no one else can replicate. It is just code. With JavaScript/TypeScript, you can accomplish any of this as well in those other libraries. Anyone who wishes can optimize any of these libraries and achieve the same results. The goal of these benchmarks and analysis is to compare and contrast which is the ideal library for scaling in terms of the libraries default behaviors, so it does not require the hackwork or forking and modifying but that it just works from the get go.
+
 
 ## Setup
 
