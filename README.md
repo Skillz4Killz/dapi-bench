@@ -164,6 +164,16 @@ The time to startup is not the only aspect to look at in terms of scalability. D
     queue is customizable), once the bot is available the queue will begin
     processing all events.
 
+#### Shortcomings Noticed
+
+There were a few things I noticed during the test. 
+
+- Discord.JS has an interesting 23 second load time on shard 5. I am not sure of the reason for this, my current assumption is that it happens because one of those servers may be huge and it takes a long time to set it up. Oddly enough, the next shard starts in <1 second so it is quite weird. 
+- Harmony also seems to have a spike in load time for certain shards. Sometimes, this will spike to 2-3 seconds higher than other shards. Detritus, Eris, and Discordeno are usually pretty consistent.
+- Detritus seems to spawn shards at random instead of a clean order. This makes it a bit annoying to be able to determine if a shard didn't spawn or not. It is not a huge deal, but would be nicer to have this sorted in my opinion.
+- Harmony is the only lib that seems to emit shard readys even after all shards have gone ready. Not a big deal, but is interesting to see.
+- Eris seems to crash the bot entirely if you don't have an error event listener for when discord normally/routinely sends a request to reset the connection. Harmony does not crash the bot, but it does have an big ugly error in the logs. Remember these errors, are not bad but they can be handled silently or opted into a debug event in my opinion. 
+
 > Note: There is no 1 perfect library! Discordeno is not some magical wonder drug that no one else can replicate. It is just code. With JavaScript/TypeScript, you can accomplish any of this as well in those other libraries. Anyone who wishes can optimize any of these libraries and achieve the same results. The goal of these benchmarks and analysis is to compare and contrast which is the ideal library for scaling in terms of the libraries default behaviors, so it does not require the hackwork or forking and modifying but that it just works from the get go.
 
 ### Analyzing The Memory Management
