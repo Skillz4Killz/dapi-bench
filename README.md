@@ -113,6 +113,8 @@ If you are using Detritus, instead of Discordeno:
 - 100,000 servers, with a total of **817.09 seconds**, Eris is **244.47** seconds slower which is about **4.0745 minutes**.
 - 1,000,000 servers, with a total of **8170.9 seconds**, Eris is **7813.0125** seconds slower which is about **130.2169 minutes**.
 
+> Note: I saw no mention of support for large bots concurrent buckets when searching through the code for Harmony, Discord.JS, and Eris libraries.
+
 Comparing the startup times for the libraries, we see that Discordeno is ahead by quite a bit. Nonetheless, this difference is almost invisible for the average small bot. If you do wish to scale up grow your bot, your best choice is obviously something that will scale with your bot. Detritus comes a close second. A 3 minute difference for starting up 1 million shards is almost nothing in reality, if you prefer the Detritus libraries API.
 
 The time to startup is not the only aspect to look at in terms of scalability. Discordeno also supports having a proxy/standalone websocket/gateway process. This allows you to have the following benefits:
