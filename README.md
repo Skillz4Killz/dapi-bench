@@ -50,6 +50,8 @@ The following data shows the first 5 minutes only. For the full 2 hour compariso
 
 [2hr Benchmarks](https://discordeno-benchmarks-graphs.pages.dev/)
 
+**Discordeno**
+
 | Minutes After Startup | RSS (MB)   | Heap Used (MB) | Heap Total (MB) |
 | --------------------- | ---------- | -------------- | --------------- |
 | 0                     | 243.892576 | 208.527604     | 244.674560      |
