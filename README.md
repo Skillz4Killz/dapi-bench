@@ -123,7 +123,7 @@ First we can discuss the startup times. To really understand this portion of the
 
 **Discordeno**
 
-If you are using Discordeno:
+Since this is the fastest library, there is nothing to compare it to.
 
 - 10,000 servers, with a total of **57.262 seconds**.
 - 100,000 servers, with a total of **572.62 seconds** which is about 9 minutes.
