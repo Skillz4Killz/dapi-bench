@@ -115,11 +115,11 @@ Based on the benchmarks above, the best and most scalable library is **Discorden
 
 First we can discuss the startup times. To really understand this portion of the benchmarks, it is important to remember that the test was conducted with a bot around ~10,000 servers. This was intentionally done so it could make it easier for us to do math to see the effects of this difference. It is also important to remember that those stats are not exactly the same each time, they can differ based on many variables such as network latency. You will see an average increase or decrease of about 5 second difference. If we were to assume that the times shown above are the average and use those to analyze the effect at scale, here is how it would go.
 
-Discordeno started up at **57.262 seconds**. This means it took on average, **5.7262 seconds** per shard to startup.
-Harmony started up at **81.543 seconds**. This means it took on average, **8.1543 seconds** per shard to startup.
-Detritus started up at **79.232 seconds**. This means it took on average, **7.9232 seconds** per shard to startup.
-Discord.js started up at **81.029 seconds**. This means it took on average, **8.1029 seconds** per shard to startup.
-Eris started up at **81.709 seconds**. This means it took on average, **8.1709 seconds** per shard to startup.
+- Discordeno started up at **57.262 seconds**. This means it took on average, **5.7262 seconds** per shard to startup.
+- Harmony started up at **81.543 seconds**. This means it took on average, **8.1543 seconds** per shard to startup.
+- Detritus started up at **79.232 seconds**. This means it took on average, **7.9232 seconds** per shard to startup.
+- Discord.js started up at **81.029 seconds**. This means it took on average, **8.1029 seconds** per shard to startup.
+- Eris started up at **81.709 seconds**. This means it took on average, **8.1709 seconds** per shard to startup.
 
 **Discordeno**
 
