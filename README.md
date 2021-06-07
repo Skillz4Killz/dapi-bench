@@ -157,7 +157,7 @@ If you are using Discordeno:
 
 Comparing the startup times for the libraries, we see that Discordeno is ahead by quite a bit. Nonetheless, this difference is almost invisible for the average small bot. If you do wish to scale up grow your bot, your best choice is obviously something that will scale with your bot. Detritus comes a close second. A 3 minute difference for starting up 1 million shards is almost nothing in reality, if you prefer the Detritus libraries API.
 
-The time to startup is not the only aspect to look at in terms of scalability. Discordeno also supports having a proxy/standalone websocket/gateway process. This allows you to have the following benefits:
+The time to startup is not the only aspect to look at in terms of scalability. After speaking to some of the developers of the biggest JS/TS bots, you begin to see a pattern of users unhappy with the current state of JS/TS libraries. They are no longer able to help them scale easily and are starting to move away to other libraries or having to make their own libraries because they need to be able to make their bot distributed. For example, having a proxy/standalone websocket/gateway process. This allows you to have the following benefits:
 
 - **Zero Downtime Updates**:
 
@@ -174,15 +174,6 @@ The time to startup is not the only aspect to look at in terms of scalability. D
     time. For example, suppose you had 150,000 servers running 150 shards. The
     maximum amount of servers your shards could hold is 150 \* 2500 = 375,000. If
     your bot reaches this, it can no longer join new servers until it re-shards.
-  - DD proxy provides 2 types of re-sharding. Automated and manual. You can also
-    have both.
-    - `Automated`: This system will automatically begin a Zero-downtime
-      resharding process behind the scenes when you reach 80% of your maximum
-      servers allowed by your shards. For example, since 375,000 was the max, at
-      300,000 we would begin re-sharding behind the scenes with `ZERO DOWNTIME`.
-      - 80% of maximum servers reached (The % of 80% is customizable.)
-      - Identify limits have room to allow re-sharding. (Also customizable)
-    - `Manual`: You can also trigger this manually should you choose.
 
 - **Horizontal Scaling**:
 
@@ -202,7 +193,7 @@ The time to startup is not the only aspect to look at in terms of scalability. D
     queue is customizable), once the bot is available the queue will begin
     processing all events.
 
-Not only can you have the gateway implementation as a standalone process, you can also separate many other things into standalone processes such as slash commands, event handlers, the REST manager and more.
+Not only can you have the gateway implementation as a standalone process, you can also separate many other things into standalone processes such as slash commands, event handlers, the REST manager and more. Because of these reasons and the data above, Discordeno appears to be the most scalable library. From the current state of these libraries, Discordeno is the only library to provide this ability to scale by allowing a distributed bot if desired.
 
 #### Shortcomings Noticed
 
