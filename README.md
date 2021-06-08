@@ -308,6 +308,122 @@ There are two big drops we should probably take a minute to discuss.
 
 - At minute 58 of the benchmark, Discordeno drops from 234MB to 101MB. This is reflecting the guilds sweeper running. Discordeno has a feature I call dispatchRequirements which allows us to determine any unused data in cache and remove them. This allows us to remove almost 85% of the data in memory. When this data is needed again, Discordeno dispatchRequirements triggers allowing it to be added back so you as the end user has no effect.
 
+#### RAM Usages
+
+It is important to remember that this test was done for a 2 hour duration. We can now use these values to estimate the amount of memory each library would take after 24 hours.
+
+- Discordeno is a bit more complicated to estimate for because it has a downwards trend of saving memory. It starts 208.5 MB and ends after 2 hours at 108.7 MB. However, throughout the hours this stays relatively stable, the big drop is near the 1 hour period which is the guild sweeper we discussed earlier. This means we can assume that over time this will remain the same. Since during the duration of those hours it does relatively stay the say. At 24 hours, Discordeno would take about 108.7MB.
+- Harmony had a upwards trend, starting at 320.5 MB and ending at 459.5 MB. This means on average it will increase +1.158333 MB every minute. If we were to add another 1,320 minutes for the remaining 22 hours. This would add ~1.5 GB for a total of about 2GB at 24 hours.
+
+- The prices listed below under the Cost To Host column use the prices provided by [netcup](https://www.netcup.eu/vserver/) at their dedicated server prices because as we have seen with several bots at this size, a dedicated server is almost always necessary and netcup has been the cheapest dedicated servers I have found.
+- The values below only take into account the libraries memory, it does not take into account the data you will add onto the cache/ram for example, command prefixes, languages and other settings/data you need cached to provide your bot's features. It will almost always be higher than the values below which means the costs will also inevitably be higher.
+- Most big bots at scale have very long uptimes to provide a stable experience for example months of uptime.
+
+**Discordeno**
+
+| Servers   | Lowest  | Highest  | Starting  | 2 hours   | Per Minute | 24 hours  | Cost (Monthly) | Cost (Yearly) |
+| --------- | ------- | -------- | --------- | --------- | ---------- | --------- | -------------- | ------------- |
+| 10,000    | ~97 MB  | ~234 MB  | ~208.5 MB | ~108.7 MB | 0 MB       | ~108.7 MB | $12.65/m       | $151.8/yr     |
+| 100,0000  | ~970 MB | ~2.34 GB | ~2.085 GB | ~1.087 GB | 0 GB       | ~1.087 GB | $12.65/m       | $151.8/yr     |
+| 1,000,000 | ~9.7 GB | ~23.4 GB | ~20.85 GB | ~10.87 GB | 0 MB       | ~10.87 GB | $19.46/m       | $233.52/yr    |
+
+**Harmony**
+
+| Servers   | Lowest   | Highest   | Starting  | 2 hours   | Per Minute | 24 hours | Cost (Monthly) | Cost (Yearly) |
+| --------- | -------- | --------- | --------- | --------- | ---------- | -------- | -------------- | ------------- |
+| 10,000    | ~229 MB  | ~491.5 MB | ~320.5 MB | ~459.6 MB | +1.1583 MB | ~1.98 GB | $12.65/m       | $151.8/yr     |
+| 100,0000  | ~2.29 GB | ~4.915 GB | ~3.205 GB | ~4.596 GB | +11.583 MB | ~19.8 GB | $35.27/m       | $423.24/yr    |
+| 1,000,000 | ~22.9 GB | ~49.15 GB | ~32.05 GB | ~45.96 GB | +115.83 MB | ~198 GB  | $223.80/m      | $2,685.6/yr   |
+
+**Detritus**
+
+| Servers   | Lowest    | Highest   | Starting  | 2 hours   | Per Minute | 24 hours  | Cost (Monthly) | Cost (Yearly) |
+| --------- | --------- | --------- | --------- | --------- | ---------- | --------- | -------------- | ------------- |
+| 10,000    | ~433.7 MB | ~475.6 MB | ~433.7 MB | ~472.4 MB | +0.3225 MB | ~898.1 MB | $12.65/m       | $151.8/yr     |
+| 100,0000  | ~4.337 GB | ~4.756 GB | ~4.337 GB | ~4.724 GB | +3.2250 MB | ~8.981 GB | $19.46/m       | $233.52/yr    |
+| 1,000,000 | ~43.37 GB | ~47.56 GB | ~43.37 GB | ~47.24 GB | +32.250 MB | ~89.81 GB | $112.93/m      | $1,355.16/yr  |
+
+**Discord.JS**
+
+| Servers   | Lowest    | Highest   | Starting  | 2 hours   | Per Minute | 24 hours | Cost (Monthly) | Cost (Yearly) |
+| --------- | --------- | --------- | --------- | --------- | ---------- | -------- | -------------- | ------------- |
+| 10,000    | ~570.3 MB | ~710.1 MB | ~570.3 MB | ~703.4 MB | +1.1092 MB | ~2.17 GB | $12.65/m       | $151.8/yr     |
+| 100,0000  | ~5.703 GB | ~7.101 GB | ~5.703 GB | ~7.034 GB | +11.092 MB | ~21.7 GB | $35.27/m       | $423.24/yr    |
+| 1,000,000 | ~57.03 GB | ~71.01 GB | ~57.03 GB | ~70.34 GB | +110.92 MB | ~217 GB  | $223.80/m      | $2,685.6/yr   |
+
+**Eris**
+
+| Servers   | Lowest    | Highest   | Starting  | 2 hours   | Per Minute | 24 hours  | Cost (Monthly) | Cost (Yearly) |
+| --------- | --------- | --------- | --------- | --------- | ---------- | --------- | -------------- | ------------- |
+| 10,000    | ~455.1 MB | ~536.5 MB | ~455.1 MB | ~495.9 MB | +0.34 MB   | ~944.7 MB | $12.65/m       | $151.8/yr     |
+| 100,0000  | ~4.551 GB | ~5.365 GB | ~4.551 GB | ~4.959 GB | +3.40 MB   | ~9.447 GB | $19.46/m       | $233.52/yr    |
+| 1,000,000 | ~45.51 GB | ~53.65 GB | ~45.51 GB | ~49.59 GB | +34.0 MB   | ~94.47 GB | $112.93/m      | $1,355.16/yr  |
+
+##### Accuracy Of Costs
+
+After speaking with some of the big bot developers who actively use Discord.JS in production at around these numbers:
+
+A Discord bot at ~170K servers is using 14GB of memory at 26 hours of uptime. At first, this way too far from the benchmarks. The benchmark numbers was estimated they would be close to 40GB worth of memory at this point in time. Upon further discussion, we realized there were differences between their bot and the benchmarks. They had disabled caching internally but that would not entirely explain the difference. The main difference we found is the `intents` were different, which meant they were receiving less events than what the benchmarks used, making it much less memory intensive.
+
+```ts
+// In the benchmark
+intents: [
+  "DIRECT_MESSAGE_REACTIONS",
+  "DIRECT_MESSAGES",
+  "GUILD_BANS",
+  "GUILD_EMOJIS",
+  "GUILD_INVITES",
+  "GUILD_MEMBERS",
+  "GUILD_MESSAGE_REACTIONS",
+  "GUILD_MESSAGES",
+  "GUILD_VOICE_STATES",
+  "GUILDS",
+],
+
+// In the bot:
+intents: [
+  "GUILD_MEMBERS",
+  "GUILD_MESSAGES",
+  "GUILD_VOICE_STATES",
+  "GUILDS",
+],
+```
+
+The intents can make a massive difference because of events like reactions which members to the cache for every reaction that is added. This helped reduce their bot's memory usage a lot compared to the benchmark. However, if this was to be accounted for the numbers in the benchmark are more than likely pretty close to the reality.
+
+---
+
+After speaking to another bot closer to the 1 million mark, at ~500K servers which is using 45.06GB at around 30 hours of uptime. They too had implemented fixes using the client options to decrease the caching and to prevent the memory leaks.
+
+```ts
+// In the benchmark
+intents: [
+  "DIRECT_MESSAGE_REACTIONS",
+  "DIRECT_MESSAGES",
+  "GUILD_BANS",
+  "GUILD_EMOJIS",
+  "GUILD_INVITES",
+  "GUILD_MEMBERS",
+  "GUILD_MESSAGE_REACTIONS",
+  "GUILD_MESSAGES",
+  "GUILD_VOICE_STATES",
+  "GUILDS",
+],
+
+// In the bot:
+intents: [
+  "GUILD_MESSAGE_REACTIONS",
+  "GUILD_MESSAGES",
+  "GUILDS",
+],
+```
+
+Once again the intents here make a huge impact on the memory usage. With just the GUILD_MEMBERS intent not requested, this prevents so many events from coming in over time from guild member updates which would bring the memory back up to par with the benchmaks data. After speaking to them, they estimate if the intents were to be matched up with the benchmarks, their usage would be much higher and close to the benchmarks values.
+
+They are currently paying $2,715.8/year to keep their bot online for a 128GB Ryzen 9 3900X. The benchmarks estimated they would be at $1,342.8/yr. This is much lower for a few reasons. The benchmarks assumed that the cheapest server would be used. For example, if they are using ~50GB, then a 64GB server would suffice, however they are using a 128GB server for future-proofing. This is a smart decision on their end. Furthermore, they are also using a different host compared to our benchmarks which can also alter the prices. Lastly, the bot will be having other things as well on the server such as a database that was not accounted for in the benchmarks. There are many more factors as well and all of them combined do help hint at the fact that these numbers are in the approximate range of being accurate.
+
+In essence, the costs are not 100% accurate. They are estimates and can change drastically based on the intents your bot's use. However, given the same intents, the costs are relatively accurate.
+
 #### Analyzing The Differences
 
 I have not done a deep dive of every library to determine each and every difference in every library to understand why each library has different amounts of memory. I have noticed a few things that were recommended to me by a friend.
