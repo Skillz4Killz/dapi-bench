@@ -109,11 +109,11 @@ The following data shows the first 5 minutes only. For the full 2 hour compariso
 
 For any benchmarks to be held as viable, they must be observable and repeatable. This is essential to make sure there is true validity. Furthermore, the tests should be done in a neutral place which can be shared by anyone. This benchmark makes use of Github Codespaces as it can be used by anyone, and it would use the same environment and specs to make sure the benchmarks are conducted with minimal variables.
 
-Based on the benchmarks above, the best and most scalable library is **Discordeno** so we will use it as the comparison point for all other libraries below.
+Based on the benchmarks above, the best and most scalable library is **Discordeno** so will be the comparison point for all other libraries below.
 
 ### Startup & Scalability
 
-First we can discuss the startup times. To really understand this portion of the benchmarks, it is important to remember that the test was conducted with a bot around ~10,000 servers. This was intentionally done so it could make it easier for us to do math to see the effects of this difference. It is also important to remember that those stats are not exactly the same each time, they can differ based on many variables such as network latency. You will see an average increase or decrease of about 5 second difference. If we were to assume that the times shown above are the average and use those to analyze the effect at scale, here is how it would go.
+First, let's discuss the startup times. To really understand this portion of the benchmarks, it is important to remember that the test was conducted with a bot around ~10,000 servers. This was intentionally done so it could make it easier for us to do math to see the effects of this difference. It is also important to remember that those stats are not exactly the same each time, they can differ based on many variables such as network latency. You will see an average increase or decrease of about 5 second difference. If an assumption is made, that the times shown above are the average and use those to analyze the effect at scale, here is how it would go.
 
 - Discordeno started up at **57.262 seconds**. This means it took on average, **5.7262 seconds** per shard to startup.
 - Harmony started up at **81.543 seconds**. This means it took on average, **8.1543 seconds** per shard to startup.
@@ -155,7 +155,7 @@ Since this is the fastest library, there is nothing to compare it to.
 
 > Note: I saw no mention of support for large bots concurrent buckets when searching through the code for Harmony, Discord.JS, and Eris libraries.
 
-Comparing the startup times for the libraries, we see that Discordeno is ahead by quite a bit. Nonetheless, this difference is almost invisible for the average small bot. If you do wish to scale up grow your bot, your best choice is obviously something that will scale with your bot. Detritus comes a close second. A 3 minute difference for starting up 1 million shards is almost nothing in reality, if you prefer the Detritus libraries API.
+Comparing the startup times for the libraries, it is clear that Discordeno is ahead by quite a bit. Nonetheless, this difference is almost invisible for the average small bot. If you do wish to scale up grow your bot, your best choice is obviously something that will scale with your bot. Detritus comes a close second. A 3 minute difference for starting up 1 million shards is almost nothing in reality, if you prefer the Detritus libraries API.
 
 The time to startup is not the only aspect to look at in terms of scalability. After speaking to some of the developers of the biggest JS/TS bots, you begin to see a pattern of users unhappy with the current state of JS/TS libraries. They are no longer able to help them scale easily and are starting to move away to other libraries or having to make their own libraries because they need to be able to make their bot distributed. For example, having a proxy/standalone websocket/gateway process. This allows you to have the following benefits:
 
@@ -209,7 +209,7 @@ There were a few things I noticed during the test.
 
 ### Analyzing The Memory Management
 
-In terms of memory management, based on the benchmarks, once again the library performing the best, is Discordeno so we will use it as the comparison point for all other libraries below.
+In terms of memory management, based on the benchmarks, once again the library performing the best, is Discordeno so it will be used as the comparison point for all other libraries below.
 
 There are a few key things to note when it comes to understanding how this test was conducted. This is not a test of memory storage but the management of memory. This means that libraries were not storing the exact same values at all given points in time. Ideally, I would love for someone to add that benchmark as well but that is incredily complex to achieve.
 
@@ -221,7 +221,7 @@ This meant that it was slightly acceptable that the libraries that were started 
 
 #### Speed Performance
 
-Interestingly, we noticed that all of the libraries performed almost exactly the same except for Harmony. Harmony was a lot slower compared to the others, I would estimate it was almost 20-30 seconds slower to log the values. There may be several reasons behind this but my main assumption after looking at the code is the design of the libraries cache managers. The only way to determine the amount of items in cache is to do a hackish solution since there is no quick lookup like other libraries. For example, to get the total guilds in cache:
+Interestingly, all of the libraries performed almost exactly the same except for Harmony. Harmony was a lot slower compared to the others, I would estimate it was almost 20-30 seconds slower to log the values. There may be several reasons behind this but my main assumption after looking at the code is the design of the libraries cache managers. The only way to determine the amount of items in cache is to do a hackish solution since there is no quick lookup like other libraries. For example, to get the total guilds in cache:
 
 ```ts
 // Discordeno
@@ -253,7 +253,7 @@ At first glance, it can be understood that the libraries that best manage memory
 4. Eris
 5. Discord.JS
 
-However, as we take a closer look at the data values for the initial values, we notice that Harmony is missing thousands of users. At the start, harmony had only cached `456` users. As a comparison:
+However, upo. a closer look at the data values for the initial values, it shows that Harmony is missing thousands of users. At the start, harmony had only cached `456` users. As a comparison:
 
 Discordeno: `2624`
 
@@ -275,7 +275,7 @@ Please, note once again the difference here between the 4 libraries is understan
 
 ---
 
-Another intersting thing, we noticed about Harmony, was that in the start of the benchmarks, it was the only library to skyrocket in terms of memory compared to the others that remained relatively stable. Harmony spiked almost 100MB of memory in the first minute.
+Another intersting thing, noticed about Harmony, was that in the start of the benchmarks, it was the only library to skyrocket in terms of memory compared to the others that remained relatively stable. Harmony spiked almost 100MB of memory in the first minute.
 
 #### Stability
 
@@ -283,7 +283,7 @@ If you look at the bigger picture for the duration of the 2 hours of testing, yo
 
 Most likely, the reason that these libraries have this infinitely growing memory usage is because they do not enable sweeping unused cached values. Infinitely growing memory usage is a leak. A lot of developers, are not aware of these options nor do they even know to enable them. I have personally met a developer who had a basic bot at 800MB on a single server by just leaving it online. More than likely, each library should be doing it's very best by default. This benchmark shows each library as is, no modifications, no nothing with the same intents. If some library, was caching members twice internally, it would not be a fair benchmark to then go and implement and optimized version of their library in order to benchmark it. Similarily, its also unfair for me to modify any other libraries defaults. Remember, this benchmark is a benchmark to show the how each library manages memory usage and not how each library stores memory using the same exact objects.
 
-I would love developers to reach out and implement another test for that benchmark that would share the same caching policies instead of the defaults. This is way to complicated to figure out for each library as I did not write those libraries. I have added an `memory/optimized` folder showing the caching policies we can all share. However, I do not believe that these new tests will show much of a difference for a few reasons. The start of the benchmarks for the first few minutes where no library will have been able to remove anything show the differences being almost the exact same as during the entire benchmark. Because of this I have also taken the time to showcase/highlight the first 5 minutes above in a table.
+I would love developers to reach out and implement another test for that benchmark that would share the same caching policies instead of the defaults. This is way to complicated to figure out for each library as I did not write those libraries. I have added an `memory/optimized` folder showing the caching policies all libraries can share. However, I do not believe that these new tests will show much of a difference for a few reasons. The start of the benchmarks for the first few minutes where no library will have been able to remove anything show the differences being almost the exact same as during the entire benchmark. Because of this I have also taken the time to showcase/highlight the first 5 minutes above in a table.
 
 Discord.JS and Eris are relatively the same stability wise. Detritus seems to be increasing slightly every minute but at a much slower rate compared to Discord.JS and Eris. Harmony seems to have been very unstable throughout the test but over time, you can see a consistent increase in memory being used.
 
@@ -295,7 +295,7 @@ Detritus is the best library in terms of which library can cache the most amount
 
 There are times in each libraries results, you can see where memory slightly falls off. This happens for several reasons. One could be the garbage collector is running for that process at the moment and cleaned up some memory. Another reason could be that some sort of default sweeper is running that cleaned up some memory.
 
-There are two big drops we should probably take a minute to discuss.
+There are two big drops that should probably be looked at in detail.
 
 - At minute 33 of the benchmark, Harmony drops from 443MB to 229MB. I have been unable to determine what caused this especially when right afterwards, it seemed to spike even higher then before.
 
@@ -303,7 +303,7 @@ There are two big drops we should probably take a minute to discuss.
 
 #### RAM Usages
 
-It is important to remember that this test was done for a 2 hour duration. We can now use these values to estimate the amount of memory each library would take after 24 hours.
+It is important to remember that this test was done for a 2 hour duration. Now let's use these values to estimate the amount of memory each library would take after 24 hours.
 
 - Discordeno is a bit more complicated to estimate for because it has a downwards trend of saving memory. It starts 208.5 MB and ends after 2 hours at 108.7 MB. However, throughout the hours this stays relatively stable, the big drop is near the 1 hour period which is the guild sweeper we discussed earlier. This means we can assume that over time this will remain the same. Since during the duration of those hours it does relatively stay the say. At 24 hours, Discordeno would take about 108.7MB.
 - Harmony had a upwards trend, starting at 320.5 MB and ending at 459.5 MB. This means on average it will increase +1.158333 MB every minute. If we were to add another 1,320 minutes for the remaining 22 hours. This would add ~1.5 GB for a total of about 2GB at 24 hours.
