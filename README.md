@@ -305,12 +305,11 @@ There are two big drops we should probably take a minute to discuss.
 
 It is important to remember that this test was done for a 2 hour duration. We can now use these values to estimate the amount of memory each library would take after 24 hours.
 
-- Discordeno is a bit more complicated to estimate for because it has a downwards trend of saving memory. It starts 208.5 MB and ends after 2 hours at 108.7 MB. However, throughout the hours this stays relatively stable, the big drop is near the 1 hour period which is the guild sweeper we discussed earlier. This means we can assume that over time this will remain the same. Since during the duration of those hours it does relatively stay the say. At 24 hours, Discordeno would take about 108.7MB.
-- Harmony had a upwards trend, starting at 320.5 MB and ending at 459.5 MB. This means on average it will increase +1.158333 MB every minute. If we were to add another 1,320 minutes for the remaining 22 hours. This would add ~1.5 GB for a total of about 2GB at 24 hours.
-
+- Discordeno is a bit more complicated to estimate for because it has a downwards trend of saving memory. It starts 208.5 MB and ends after 2 hours at 108.7 MB. However, throughout the hours this stays relatively stable, the big drop is near the 1 hour period which is the guild sweeper we discussed earlier. This means we can assume that over time this will remain the same with a net increase of +0MB/minute. Since during the duration of those hours it does relatively stay the say. At 24 hours, Discordeno would take about 108.7MB. 
+- To calculate the per minute for each library take the `2 hours` value and subtract the `Starting` value. Then divide the result by 120, the minutes in the two hours which was tested.
+- To calculate 24 hours, multiply the `Per Minute` value by 60 to get hourly then multiply by 22. The result here is added to the value of `2 hours`.
 - The prices listed below under the Cost To Host column use the prices provided by [netcup](https://www.netcup.eu/vserver/) at their dedicated server prices because as we have seen with several bots at this size, a dedicated server is almost always necessary and netcup has been the cheapest dedicated servers I have found.
 - The values below only take into account the libraries memory, it does not take into account the data you will add onto the cache/ram for example, command prefixes, languages and other settings/data you need cached to provide your bot's features. It will almost always be higher than the values below which means the costs will also inevitably be higher.
-- Most big bots at scale have very long uptimes to provide a stable experience for example months of uptime.
 
 **Discordeno**
 
