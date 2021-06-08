@@ -50,6 +50,8 @@ The following data shows the first 5 minutes only. For the full 2 hour compariso
 
 [2hr Benchmarks](https://discordeno-benchmarks-graphs.pages.dev/)
 
+**Discordeno**
+
 | Minutes After Startup | RSS (MB)   | Heap Used (MB) | Heap Total (MB) |
 | --------------------- | ---------- | -------------- | --------------- |
 | 0                     | 243.892576 | 208.527604     | 244.674560      |
@@ -113,15 +115,15 @@ Based on the benchmarks above, the best and most scalable library is **Discorden
 
 First we can discuss the startup times. To really understand this portion of the benchmarks, it is important to remember that the test was conducted with a bot around ~10,000 servers. This was intentionally done so it could make it easier for us to do math to see the effects of this difference. It is also important to remember that those stats are not exactly the same each time, they can differ based on many variables such as network latency. You will see an average increase or decrease of about 5 second difference. If we were to assume that the times shown above are the average and use those to analyze the effect at scale, here is how it would go.
 
-Discordeno started up at **57.262 seconds**. This means it took on average, **5.7262 seconds** per shard to startup.
-Harmony started up at **81.543 seconds**. This means it took on average, **8.1543 seconds** per shard to startup.
-Detritus started up at **79.232 seconds**. This means it took on average, **7.9232 seconds** per shard to startup.
-Discord.js started up at **81.029 seconds**. This means it took on average, **8.1029 seconds** per shard to startup.
-Eris started up at **81.709 seconds**. This means it took on average, **8.1709 seconds** per shard to startup.
+- Discordeno started up at **57.262 seconds**. This means it took on average, **5.7262 seconds** per shard to startup.
+- Harmony started up at **81.543 seconds**. This means it took on average, **8.1543 seconds** per shard to startup.
+- Detritus started up at **79.232 seconds**. This means it took on average, **7.9232 seconds** per shard to startup.
+- Discord.js started up at **81.029 seconds**. This means it took on average, **8.1029 seconds** per shard to startup.
+- Eris started up at **81.709 seconds**. This means it took on average, **8.1709 seconds** per shard to startup.
 
 **Discordeno**
 
-If you are using Discordeno:
+Since this is the fastest library, there is nothing to compare it to.
 
 - 10,000 servers, with a total of **57.262 seconds**.
 - 100,000 servers, with a total of **572.62 seconds** which is about 9 minutes.
@@ -155,7 +157,7 @@ If you are using Discordeno:
 
 Comparing the startup times for the libraries, we see that Discordeno is ahead by quite a bit. Nonetheless, this difference is almost invisible for the average small bot. If you do wish to scale up grow your bot, your best choice is obviously something that will scale with your bot. Detritus comes a close second. A 3 minute difference for starting up 1 million shards is almost nothing in reality, if you prefer the Detritus libraries API.
 
-The time to startup is not the only aspect to look at in terms of scalability. Discordeno also supports having a proxy/standalone websocket/gateway process. This allows you to have the following benefits:
+The time to startup is not the only aspect to look at in terms of scalability. After speaking to some of the developers of the biggest JS/TS bots, you begin to see a pattern of users unhappy with the current state of JS/TS libraries. They are no longer able to help them scale easily and are starting to move away to other libraries or having to make their own libraries because they need to be able to make their bot distributed. For example, having a proxy/standalone websocket/gateway process. This allows you to have the following benefits:
 
 - **Zero Downtime Updates**:
 
@@ -172,15 +174,6 @@ The time to startup is not the only aspect to look at in terms of scalability. D
     time. For example, suppose you had 150,000 servers running 150 shards. The
     maximum amount of servers your shards could hold is 150 \* 2500 = 375,000. If
     your bot reaches this, it can no longer join new servers until it re-shards.
-  - DD proxy provides 2 types of re-sharding. Automated and manual. You can also
-    have both.
-    - `Automated`: This system will automatically begin a Zero-downtime
-      resharding process behind the scenes when you reach 80% of your maximum
-      servers allowed by your shards. For example, since 375,000 was the max, at
-      300,000 we would begin re-sharding behind the scenes with `ZERO DOWNTIME`.
-      - 80% of maximum servers reached (The % of 80% is customizable.)
-      - Identify limits have room to allow re-sharding. (Also customizable)
-    - `Manual`: You can also trigger this manually should you choose.
 
 - **Horizontal Scaling**:
 
@@ -200,7 +193,7 @@ The time to startup is not the only aspect to look at in terms of scalability. D
     queue is customizable), once the bot is available the queue will begin
     processing all events.
 
-Not only can you have the gateway implementation as a standalone process, you can also separate many other things into standalone processes such as slash commands, event handlers, the REST manager and more.
+Not only can you have the gateway implementation as a standalone process, you can also separate many other things into standalone processes such as slash commands, event handlers, the REST manager and more. Because of these reasons and the data above, Discordeno appears to be the most scalable library. From the current state of these libraries, Discordeno is the only library to provide this ability to scale by allowing a distributed bot if desired.
 
 #### Shortcomings Noticed
 
