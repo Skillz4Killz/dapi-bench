@@ -227,7 +227,7 @@ Interestingly, all of the libraries performed almost exactly the same except for
 // Discordeno
 cache.guilds.size
 // Discord.js
-client.guilds.size
+client.guilds.cache.size
 
 // Harmony
 (await harmony.guilds.array()).length,
