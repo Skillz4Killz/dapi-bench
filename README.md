@@ -205,8 +205,6 @@ There were a few things I noticed during the test.
 - Harmony is the only lib that seems to emit shard readys even after all shards have gone ready. Not a big deal, but is interesting to see.
 - Eris seems to crash the bot entirely if you don't have an error event listener for when discord normally/routinely sends a request to reset the connection. Harmony does not crash the bot, but it does have an big ugly error in the logs. Remember these errors, are not bad but they can be handled silently or opted into a debug event.
 
-> Note: There is no 1 perfect library! Discordeno is not some magical wonder drug that no one else can replicate. It is just code. With JavaScript/TypeScript, you can accomplish any of this as well in those other libraries. Anyone who wishes can optimize any of these libraries and achieve the same results. The goal of these benchmarks and analysis is to compare and contrast which is the ideal library for scaling in terms of the libraries default behaviors, so it does not require the hackwork or forking and modifying but that it just works from the get go.
-
 ### Analyzing The Memory Management
 
 In terms of memory management, based on the benchmarks, once again the library performing the best, is Discordeno so it will be used as the comparison point for all other libraries below.
@@ -428,8 +426,6 @@ I have not done a deep dive of every library to determine each and every differe
 
 ![image](https://user-images.githubusercontent.com/23035000/120937834-bf085b00-c6dd-11eb-8e0b-426a97394bd7.png)
 
-> Note: There is no 1 perfect library! Discordeno is not some magical wonder drug that no one else can replicate. It is just code. With JavaScript/TypeScript, you can accomplish any of this as well in those other libraries. Anyone who wishes can optimize any of these libraries and achieve the same results. The goal of these benchmarks and analysis is to compare and contrast which is the ideal library for scaling in terms of the libraries default behaviors, so it does not require the hackwork or forking and modifying but that it just works from the get go.
-
 ## Thank You
 
 Thank you for taking the time to read this. Thank you to those who helped contribute to this. Thank you to those who helped me think through this by helping me bounce the ideas off of you. Thank you to everyone who helped in anyway that I did not remember. Thank you Discord for making an awesome API.
@@ -437,8 +433,6 @@ Thank you for taking the time to read this. Thank you to those who helped contri
 ## Final Notes
 
 Rust > \*. There is a Rust library going even more above and beyond but their developer asked me not to mention them in this so I have respected their wish and left them out of this analysis. After that I decided to keep this benchmark to only JS/TS libraries.
-
-> Note: There is no 1 perfect library! Discordeno is not some magical wonder drug that no one else can replicate. It is just code. With JavaScript/TypeScript, you can accomplish any of this as well in those other libraries. Anyone who wishes can optimize any of these libraries and achieve the same results. The goal of these benchmarks and analysis is to compare and contrast which is the ideal library for scaling in terms of the libraries default behaviors, so it does not require the hackwork or forking and modifying but that it just works from the get go.
 
 ## Setup
 
